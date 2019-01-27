@@ -9,6 +9,7 @@ import { withAuthenticator } from 'aws-amplify-react-native';
 import { Auth } from 'aws-amplify';
 import Amplify from '@aws-amplify/core';
 import config from './aws-exports';
+
 Amplify.configure(config)
 
 class App extends React.Component {
@@ -39,6 +40,7 @@ class App extends React.Component {
     const user = await Auth.signIn(username, password)
     this.setState({ user })
     console.log('sign in successful!')
+
   }
   async confirmSignIn() {
     const { user, authCode } = this.state
@@ -46,6 +48,8 @@ class App extends React.Component {
     console.log('user now successfully signed in to the app!!')
   }
   
+  
+
   render() {
     return (
       <Container>

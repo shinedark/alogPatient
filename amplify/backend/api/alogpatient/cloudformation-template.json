@@ -22,31 +22,6 @@
             "Description": "The epoch time in seconds when the API Key should expire. Setting this to 0 will default to 1 week from the deployment date. Setting this to -1 will not create an API Key.",
             "Default": 0
         },
-        "AuthCognitoUserPoolId": {
-            "Type": "String",
-            "Description": "The id of an existing User Pool to connect. If this is changed, a user pool will not be created for you.",
-            "Default": "NONE"
-        },
-        "AuthCognitoUserPoolName": {
-            "Type": "String",
-            "Description": "The name of the user pool.",
-            "Default": "AppSyncUserPool"
-        },
-        "AuthCognitoUserPoolMobileClientName": {
-            "Type": "String",
-            "Description": "The name of the native user pool client.",
-            "Default": "CognitoNativeClient"
-        },
-        "AuthCognitoUserPoolJSClientName": {
-            "Type": "String",
-            "Description": "The name of the web user pool client.",
-            "Default": "CognitoJSClient"
-        },
-        "AuthCognitoUserPoolRefreshTokenValidity": {
-            "Type": "Number",
-            "Description": "The time limit, in days, after which the refresh token is no longer valid.",
-            "Default": 30
-        },
         "ResolverBucket": {
             "Type": "String",
             "Description": "The name of the bucket containing the resolver templates"
@@ -85,24 +60,7 @@
                 "Name": {
                     "Ref": "AppSyncApiName"
                 },
-                "AuthenticationType": "AMAZON_COGNITO_USER_POOLS",
-                "UserPoolConfig": {
-                    "UserPoolId": {
-                        "Fn::If": [
-                            "AuthShouldCreateUserPool",
-                            {
-                                "Ref": "AuthCognitoUserPool"
-                            },
-                            {
-                                "Ref": "AuthCognitoUserPoolId"
-                            }
-                        ]
-                    },
-                    "AwsRegion": {
-                        "Ref": "AWS::Region"
-                    },
-                    "DefaultAction": "ALLOW"
-                }
+                "AuthenticationType": "API_KEY"
             }
         },
         "GraphQLAPIKey": {
@@ -120,20 +78,20 @@
                         {
                             "Ref": "APIKeyExpirationEpoch"
                         },
-                        1549160513
+                        1549218295
                     ]
                 }
             },
             "Condition": "APIKeyExpirationEpochIsNotNegOne"
         },
-        "LogsTable": {
+        "LogTable": {
             "Type": "AWS::DynamoDB::Table",
             "Properties": {
                 "TableName": {
                     "Fn::Join": [
                         "-",
                         [
-                            "Logs",
+                            "Log",
                             {
                                 "Fn::GetAtt": [
                                     "GraphQLAPI",
@@ -168,14 +126,14 @@
                 }
             }
         },
-        "LogsIAMRole": {
+        "LogIAMRole": {
             "Type": "AWS::IAM::Role",
             "Properties": {
                 "RoleName": {
                     "Fn::Join": [
                         "-",
                         [
-                            "LogsTable",
+                            "LogTable",
                             "role",
                             {
                                 "Fn::GetAtt": [
@@ -219,7 +177,7 @@
                                     "Resource": [
                                         {
                                             "Fn::GetAtt": [
-                                                "LogsTable",
+                                                "LogTable",
                                                 "Arn"
                                             ]
                                         },
@@ -229,7 +187,7 @@
                                                 [
                                                     {
                                                         "Fn::GetAtt": [
-                                                            "LogsTable",
+                                                            "LogTable",
                                                             "Arn"
                                                         ]
                                                     },
@@ -245,7 +203,7 @@
                 ]
             }
         },
-        "LogsDataSource": {
+        "LogDataSource": {
             "Type": "AWS::AppSync::DataSource",
             "Properties": {
                 "ApiId": {
@@ -254,11 +212,11 @@
                         "ApiId"
                     ]
                 },
-                "Name": "LogsTable",
+                "Name": "LogTable",
                 "Type": "AMAZON_DYNAMODB",
                 "ServiceRoleArn": {
                     "Fn::GetAtt": [
-                        "LogsIAMRole",
+                        "LogIAMRole",
                         "Arn"
                     ]
                 },
@@ -271,7 +229,7 @@
                                     ":",
                                     {
                                         "Fn::GetAtt": [
-                                            "LogsTable",
+                                            "LogTable",
                                             "Arn"
                                         ]
                                     }
@@ -280,16 +238,16 @@
                         ]
                     },
                     "TableName": {
-                        "Ref": "LogsTable"
+                        "Ref": "LogTable"
                     }
                 }
             },
             "DependsOn": [
-                "LogsTable",
-                "LogsIAMRole"
+                "LogTable",
+                "LogIAMRole"
             ]
         },
-        "GetLogsResolver": {
+        "GetLogResolver": {
             "Type": "AWS::AppSync::Resolver",
             "Properties": {
                 "ApiId": {
@@ -300,11 +258,11 @@
                 },
                 "DataSourceName": {
                     "Fn::GetAtt": [
-                        "LogsDataSource",
+                        "LogDataSource",
                         "Name"
                     ]
                 },
-                "FieldName": "getLogs",
+                "FieldName": "getLog",
                 "TypeName": "Query",
                 "RequestMappingTemplateS3Location": {
                     "Fn::Join": [
@@ -326,7 +284,7 @@
                                                 ".",
                                                 [
                                                     "Query",
-                                                    "getLogs",
+                                                    "getLog",
                                                     "request",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -360,7 +318,7 @@
                                                 ".",
                                                 [
                                                     "Query",
-                                                    "getLogs",
+                                                    "getLog",
                                                     "response",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -377,7 +335,7 @@
             },
             "DependsOn": "GraphQLSchema"
         },
-        "ListLogsResolver": {
+        "ListLogResolver": {
             "Type": "AWS::AppSync::Resolver",
             "Properties": {
                 "ApiId": {
@@ -388,11 +346,11 @@
                 },
                 "DataSourceName": {
                     "Fn::GetAtt": [
-                        "LogsDataSource",
+                        "LogDataSource",
                         "Name"
                     ]
                 },
-                "FieldName": "listLogss",
+                "FieldName": "listLogs",
                 "TypeName": "Query",
                 "RequestMappingTemplateS3Location": {
                     "Fn::Join": [
@@ -414,7 +372,7 @@
                                                 ".",
                                                 [
                                                     "Query",
-                                                    "listLogss",
+                                                    "listLogs",
                                                     "request",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -448,7 +406,7 @@
                                                 ".",
                                                 [
                                                     "Query",
-                                                    "listLogss",
+                                                    "listLogs",
                                                     "response",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -465,7 +423,7 @@
             },
             "DependsOn": "GraphQLSchema"
         },
-        "CreateLogsResolver": {
+        "CreateLogResolver": {
             "Type": "AWS::AppSync::Resolver",
             "Properties": {
                 "ApiId": {
@@ -476,11 +434,11 @@
                 },
                 "DataSourceName": {
                     "Fn::GetAtt": [
-                        "LogsDataSource",
+                        "LogDataSource",
                         "Name"
                     ]
                 },
-                "FieldName": "createLogs",
+                "FieldName": "createLog",
                 "TypeName": "Mutation",
                 "RequestMappingTemplateS3Location": {
                     "Fn::Join": [
@@ -502,7 +460,7 @@
                                                 ".",
                                                 [
                                                     "Mutation",
-                                                    "createLogs",
+                                                    "createLog",
                                                     "request",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -536,7 +494,7 @@
                                                 ".",
                                                 [
                                                     "Mutation",
-                                                    "createLogs",
+                                                    "createLog",
                                                     "response",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -553,7 +511,7 @@
             },
             "DependsOn": "GraphQLSchema"
         },
-        "UpdateLogsResolver": {
+        "UpdateLogResolver": {
             "Type": "AWS::AppSync::Resolver",
             "Properties": {
                 "ApiId": {
@@ -564,11 +522,11 @@
                 },
                 "DataSourceName": {
                     "Fn::GetAtt": [
-                        "LogsDataSource",
+                        "LogDataSource",
                         "Name"
                     ]
                 },
-                "FieldName": "updateLogs",
+                "FieldName": "updateLog",
                 "TypeName": "Mutation",
                 "RequestMappingTemplateS3Location": {
                     "Fn::Join": [
@@ -590,7 +548,7 @@
                                                 ".",
                                                 [
                                                     "Mutation",
-                                                    "updateLogs",
+                                                    "updateLog",
                                                     "request",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -624,7 +582,7 @@
                                                 ".",
                                                 [
                                                     "Mutation",
-                                                    "updateLogs",
+                                                    "updateLog",
                                                     "response",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -641,7 +599,7 @@
             },
             "DependsOn": "GraphQLSchema"
         },
-        "DeleteLogsResolver": {
+        "DeleteLogResolver": {
             "Type": "AWS::AppSync::Resolver",
             "Properties": {
                 "ApiId": {
@@ -652,11 +610,11 @@
                 },
                 "DataSourceName": {
                     "Fn::GetAtt": [
-                        "LogsDataSource",
+                        "LogDataSource",
                         "Name"
                     ]
                 },
-                "FieldName": "deleteLogs",
+                "FieldName": "deleteLog",
                 "TypeName": "Mutation",
                 "RequestMappingTemplateS3Location": {
                     "Fn::Join": [
@@ -678,7 +636,7 @@
                                                 ".",
                                                 [
                                                     "Mutation",
-                                                    "deleteLogs",
+                                                    "deleteLog",
                                                     "request",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -712,7 +670,7 @@
                                                 ".",
                                                 [
                                                     "Mutation",
-                                                    "deleteLogs",
+                                                    "deleteLog",
                                                     "response",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -728,86 +686,6 @@
                 }
             },
             "DependsOn": "GraphQLSchema"
-        },
-        "AuthCognitoUserPool": {
-            "Type": "AWS::Cognito::UserPool",
-            "Properties": {
-                "UserPoolName": {
-                    "Ref": "AuthCognitoUserPoolName"
-                },
-                "Policies": {
-                    "PasswordPolicy": {
-                        "MinimumLength": 8,
-                        "RequireLowercase": true,
-                        "RequireNumbers": true,
-                        "RequireSymbols": true,
-                        "RequireUppercase": true
-                    }
-                },
-                "Schema": [
-                    {
-                        "Name": "email",
-                        "Required": true,
-                        "Mutable": true
-                    }
-                ],
-                "AutoVerifiedAttributes": [
-                    "email"
-                ]
-            },
-            "Condition": "AuthShouldCreateUserPool"
-        },
-        "AuthCognitoUserPoolNativeClient": {
-            "Type": "AWS::Cognito::UserPoolClient",
-            "Properties": {
-                "ClientName": {
-                    "Ref": "AuthCognitoUserPoolMobileClientName"
-                },
-                "UserPoolId": {
-                    "Fn::If": [
-                        "AuthShouldCreateUserPool",
-                        {
-                            "Ref": "AuthCognitoUserPool"
-                        },
-                        {
-                            "Ref": "AuthCognitoUserPoolId"
-                        }
-                    ]
-                },
-                "GenerateSecret": true,
-                "RefreshTokenValidity": {
-                    "Ref": "AuthCognitoUserPoolRefreshTokenValidity"
-                },
-                "ReadAttributes": [],
-                "WriteAttributes": []
-            },
-            "Condition": "AuthShouldCreateUserPool"
-        },
-        "AuthCognitoUserPoolJSClient": {
-            "Type": "AWS::Cognito::UserPoolClient",
-            "Properties": {
-                "ClientName": {
-                    "Ref": "AuthCognitoUserPoolJSClientName"
-                },
-                "UserPoolId": {
-                    "Fn::If": [
-                        "AuthShouldCreateUserPool",
-                        {
-                            "Ref": "AuthCognitoUserPool"
-                        },
-                        {
-                            "Ref": "AuthCognitoUserPoolId"
-                        }
-                    ]
-                },
-                "GenerateSecret": false,
-                "RefreshTokenValidity": {
-                    "Ref": "AuthCognitoUserPoolRefreshTokenValidity"
-                },
-                "ReadAttributes": [],
-                "WriteAttributes": []
-            },
-            "Condition": "AuthShouldCreateUserPool"
         }
     },
     "Outputs": {
@@ -877,103 +755,6 @@
                 }
             },
             "Condition": "APIKeyExpirationEpochIsNotNegOne"
-        },
-        "AuthCognitoUserPoolNativeClientId": {
-            "Description": "Amazon Cognito UserPools native client ID",
-            "Value": {
-                "Fn::If": [
-                    "AuthShouldCreateUserPool",
-                    {
-                        "Ref": "AuthCognitoUserPoolNativeClient"
-                    },
-                    {
-                        "Fn::Join": [
-                            " ",
-                            [
-                                "See UserPool:",
-                                {
-                                    "Ref": "AuthCognitoUserPoolId"
-                                }
-                            ]
-                        ]
-                    }
-                ]
-            },
-            "Export": {
-                "Name": {
-                    "Fn::Join": [
-                        ":",
-                        [
-                            {
-                                "Ref": "AWS::StackName"
-                            },
-                            "CognitoNativeClient"
-                        ]
-                    ]
-                }
-            }
-        },
-        "AuthCognitoUserPoolJSClientId": {
-            "Description": "Amazon Cognito UserPools JS client ID",
-            "Value": {
-                "Fn::If": [
-                    "AuthShouldCreateUserPool",
-                    {
-                        "Ref": "AuthCognitoUserPoolJSClient"
-                    },
-                    {
-                        "Fn::Join": [
-                            " ",
-                            [
-                                "See UserPool:",
-                                {
-                                    "Ref": "AuthCognitoUserPoolId"
-                                }
-                            ]
-                        ]
-                    }
-                ]
-            },
-            "Export": {
-                "Name": {
-                    "Fn::Join": [
-                        ":",
-                        [
-                            {
-                                "Ref": "AWS::StackName"
-                            },
-                            "CognitoJSClient"
-                        ]
-                    ]
-                }
-            }
-        },
-        "AuthCognitoUserPoolIdOutput": {
-            "Description": "Amazon Cognito UserPool id",
-            "Value": {
-                "Fn::If": [
-                    "AuthShouldCreateUserPool",
-                    {
-                        "Ref": "AuthCognitoUserPool"
-                    },
-                    {
-                        "Ref": "AuthCognitoUserPoolId"
-                    }
-                ]
-            },
-            "Export": {
-                "Name": {
-                    "Fn::Join": [
-                        ":",
-                        [
-                            {
-                                "Ref": "AWS::StackName"
-                            },
-                            "CognitoUserPoolId"
-                        ]
-                    ]
-                }
-            }
         }
     },
     "Conditions": {
@@ -1023,14 +804,6 @@
                         }
                     ]
                 }
-            ]
-        },
-        "AuthShouldCreateUserPool": {
-            "Fn::Equals": [
-                {
-                    "Ref": "AuthCognitoUserPoolId"
-                },
-                "NONE"
             ]
         }
     }

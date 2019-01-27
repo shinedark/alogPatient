@@ -25,7 +25,7 @@ import API, { graphqlOperation } from '@aws-amplify/api';
 
 
 const listLogs = `
-  query{
+  query Logs{
     listLogs{
       items{
         id
@@ -38,7 +38,7 @@ const listLogs = `
     }
   }`
 const createLog = `
-  mutation($description: String!, $log: String!, $mood: String!, $date: String! , $meds: String! ) {
+  mutation($description: String, $log: String, $mood: String, $date: String , $meds: String ) {
     createLog(input: {
       log: $log
       description: $description
@@ -133,7 +133,7 @@ export default class Log extends Component {
               mode="dropdown"
               iosHeader="Select Mood"
               iosIcon={<Icon name="arrow-down" />}
-              style={{ width: undefined }}
+              style={{ width: 300 }}
               selectedValue={this.state.mood}
               onValueChange={this.onValueChange.bind(this)}
             >
@@ -157,13 +157,13 @@ export default class Log extends Component {
           </Button>
           {
                     this.state.logs.map((logsAdded, index) => (
-                      <View key={index} >
+                      <Card key={index} >
                         <CardItem><Text>{logsAdded.description}</Text></CardItem>
                         <CardItem><Text>{logsAdded.log}</Text></CardItem>
                         <CardItem><Text>{logsAdded.meds.toString()}</Text></CardItem>
                         <CardItem><Text>{logsAdded.date}</Text></CardItem>
                         <CardItem><Text>{logsAdded.mood}</Text></CardItem>
-                      </View>
+                      </Card>
                     ))
                   }
         </Content>
