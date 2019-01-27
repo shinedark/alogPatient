@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { View} from 'react-native';
 import { 
   Container, 
   Content,  
@@ -20,19 +21,64 @@ import {
 
 } from 'native-base';
 
+import API, { graphqlOperation } from '@aws-amplify/api';
+
+
+const listLogs = `
+  query{
+    listLogs{
+      items{
+        id
+        log
+        description
+        mood
+        date
+        meds
+      }
+    }
+  }`
+const createLog = `
+  mutation($description: String!, $log: String!, $mood: String!, $date: String! , $meds: String! ) {
+    createLog(input: {
+      log: $log
+      description: $description
+      mood: $mood
+      date: $date
+      meds: $meds
+  }) {
+    id
+    log
+    description
+    mood
+    date
+    meds
+  }
+}`
+
 export default class Log extends Component {
   
   constructor(props) {
       super(props);
       this.state = {
-        mood: "Positive",
+        mood: 'Positive',
         date: new Date().toLocaleString(),
-        meds: false,
+        medsCheck: false,
+        meds: '',
         description: '',
         log: '',
         logs:[]
     };
   }
+
+  async componentDidMount() {
+      try {
+        const graphqldata = await API.graphql(graphqlOperation(listLogs))
+        console.log('graphqldata:', graphqldata)
+        this.setState({ logs: graphqldata.data.listLogs.items })
+      } catch (err) {
+        console.log('error: ', err)
+      }
+    }
 
   onValueChange(value: string) {
       this.setState({
@@ -42,10 +88,11 @@ export default class Log extends Component {
 
   medCheck = () => {
     if (!this.state.meds) {
-      this.setState({meds: true});
+      this.setState({medsCheck: true, meds:'Yes' });
       console.log('cheked on');
+
     } else {
-      this.setState({meds: false});
+      this.setState({medsCheck: false, meds: 'No'});
       console.log('cheked off');
     }
   }
@@ -55,12 +102,12 @@ export default class Log extends Component {
     }
 
   createLog = async () => {
-      const log = this.state
-      if (log.description === '' || log.log === '') return
-      const logs = [...this.state.logs, log]
-      this.setState({ logs, description: '', log: '', meds: false, mood:"Positive",  date: new Date().toLocaleString() })
+      const logsAdded = this.state
+      if (logsAdded.description === '' || logsAdded.log === ''|| logsAdded.date === ''||logsAdded.meds === true) return
+      const logs = [...this.state.logs, logsAdded]
+      this.setState({ logs, description: '', log: '',  mood:'',  date: '',  meds: false  })
       try {
-        // await API.graphql(graphqlOperation(createPet, pet))
+        await API.graphql(graphqlOperation(createLog, logsAdded))
         console.log('logs successfully created.')
       } catch (err) {
         console.log('error creating log..', err)
@@ -75,11 +122,11 @@ export default class Log extends Component {
           <Form>
             <Item floatingLabel>
               <Label>Description</Label>
-              <Input onChangeText={val => this.onChangeText('description', val)} />
+              <Input onChangeText={val => this.onChangeText('description', val)} value={this.state.description} />
             </Item>
           </Form>
           <Form>
-              <Textarea  style={{margin: 3}} rowSpan={6} bordered placeholder="Log" onChangeText={val => this.onChangeText('log', val)} />
+              <Textarea  style={{margin: 3}} rowSpan={6} bordered placeholder="Log" onChangeText={val => this.onChangeText('log', val)}  value={this.state.log}/>
           </Form>
           <Form>
             <Picker
@@ -90,15 +137,15 @@ export default class Log extends Component {
               selectedValue={this.state.mood}
               onValueChange={this.onValueChange.bind(this)}
             >
-              <Picker.Item label="Positive" value="Positive" />
-              <Picker.Item label="Negative" value="Negative" />
-              <Picker.Item label="Urgent" value="Urgent" />
-              <Picker.Item label="Reminder" value="Reminder" />
+              <Picker.Item label="Positive" value='Positive' />
+              <Picker.Item label="Negative" value='Negative' />
+              <Picker.Item label="Urgent" value='Urgent' />
+              <Picker.Item label="Reminder" value='Reminder' />
             </Picker>
           </Form>
           <Form>
             <ListItem>
-              <CheckBox checked={this.state.meds} color="blue" onPress={this.medCheck} />
+              <CheckBox checked={this.state.medsCheck} color="blue" onPress={this.medCheck} />
                 <Body>
                   <Text>Did you take any medication?</Text>
                 </Body>
@@ -109,14 +156,14 @@ export default class Log extends Component {
             <Text>Save Log</Text>
           </Button>
           {
-                    this.state.logs.map((log, index) => (
-                      <Card key={index} >
-                        <CardItem><Text>{log.description}</Text></CardItem>
-                        <CardItem><Text>{log.log}</Text></CardItem>
-                        <CardItem><Text>{log.meds.toString()}</Text></CardItem>
-                        <CardItem><Text>{log.date}</Text></CardItem>
-                        <CardItem><Text>{log.mood}</Text></CardItem>
-                      </Card>
+                    this.state.logs.map((logsAdded, index) => (
+                      <View key={index} >
+                        <CardItem><Text>{logsAdded.description}</Text></CardItem>
+                        <CardItem><Text>{logsAdded.log}</Text></CardItem>
+                        <CardItem><Text>{logsAdded.meds.toString()}</Text></CardItem>
+                        <CardItem><Text>{logsAdded.date}</Text></CardItem>
+                        <CardItem><Text>{logsAdded.mood}</Text></CardItem>
+                      </View>
                     ))
                   }
         </Content>
