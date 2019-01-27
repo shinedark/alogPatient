@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { Container, Header, Tab, Tabs, TabHeading, Icon, Text , Body, Title} from 'native-base';
 import Log from './components/Log';
 import Events from './components/Events';
-import Progress from './components/Progress';
+
 
 
 import { withAuthenticator } from 'aws-amplify-react-native';
@@ -64,9 +64,6 @@ class App extends React.Component {
           </Tab>
           <Tab heading={ <TabHeading><Icon name="ios-calendar" /><Text>Events</Text></TabHeading>}>
             <Events />
-          </Tab>
-          <Tab heading={ <TabHeading><Icon name="apps" /><Text>Progress</Text></TabHeading>}>
-            <Progress />
           </Tab>
         </Tabs>
       </Container>
