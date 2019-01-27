@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Alert} from 'react-native';
+import { View} from 'react-native';
 import { 
   Container, 
   Content,  
@@ -60,8 +60,8 @@ export default class Log extends Component {
   constructor(props) {
       super(props);
       this.state = {
-        mood: 'Positive',
-        date: new Date().toLocaleString(),
+        mood: '',
+        date: '',
         medsCheck: false,
         meds: '',
         description: '',
@@ -71,6 +71,11 @@ export default class Log extends Component {
   }
 
   async componentDidMount() {
+      setInterval( () => {
+            this.setState({
+              date : new Date().toLocaleString()
+            })
+          },1000)
       try {
         const graphqldata = await API.graphql(graphqlOperation(listLogs))
         console.log('graphqldata:', graphqldata)
@@ -98,15 +103,15 @@ export default class Log extends Component {
   }
 
   onChangeText = (key, val) => {
-      this.setState({ [key]: val })
+      this.setState({ [key]: val})
     }
 
   createLog = async () => {
+
       const logsAdded = this.state
-      if (logsAdded.description === '' || logsAdded.log === ''|| logsAdded.date === ''||logsAdded.meds === true) return
+      if (logsAdded.description === '' || logsAdded.log === ''|| logsAdded.date === '' ||logsAdded.medsCheck === false ||logsAdded.mood === 'green'||logsAdded.meds === '') return
       const logs = [...this.state.logs, logsAdded]
-      this.setState({ logs, description: '', log: '',  mood:'',  date: '',  meds: false  })
-      Alert.alert('Log Saved')
+      this.setState({ logs, description: '', log: '',  mood:'',  date: '',  medsCheck: false , meds: '' })
       try {
         await API.graphql(graphqlOperation(createLog, logsAdded))
         console.log('logs successfully created.')
@@ -138,11 +143,12 @@ export default class Log extends Component {
               style={{ width: 300 }}
               selectedValue={this.state.mood}
               onValueChange={this.onValueChange.bind(this)}
+              label="What's your mood"
             >
-              <Picker.Item label="Positive" value='Positive' />
-              <Picker.Item label="Negative" value='Negative' />
-              <Picker.Item label="Urgent" value='Urgent' />
-              <Picker.Item label="Reminder" value='Reminder' />
+              <Picker.Item label="Positive" value='green' />
+              <Picker.Item label="Negative" value='blue' />
+              <Picker.Item label="Urgent" value='red' />
+              <Picker.Item label="Reminder" value='yellow' />
             </Picker>
           </Form>
           <Form>

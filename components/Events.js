@@ -22,18 +22,15 @@ const listLogs = `
 
 export default class Events extends Component {
   
-  constructor(props) {
-      super(props);
-      this.state = {
-        mood: 'Positive',
-        date: new Date().toLocaleString(),
-        medsCheck: false,
+ state = {
+        mood: '',
+        date: '',
         meds: '',
         description: '',
         log: '',
         logs:[]
-    };
-  }
+    }
+
 
   async componentDidMount() {
       try {
@@ -56,7 +53,7 @@ export default class Events extends Component {
                 <CardSection><Text>{logsAdded.log}</Text></CardSection>
                 <CardSection><Text>{logsAdded.meds.toString()}</Text></CardSection>
                 <CardSection><Text>{logsAdded.date}</Text></CardSection>
-                <CardSection><Text>{logsAdded.mood}</Text></CardSection>
+                <Card style={{backgroundColor: logsAdded.mood, padding: 10}}></Card>
               </Card>
             ))
           }
