@@ -2,21 +2,14 @@
 
 const awsmobile = {
     "aws_project_region": "us-east-2",
-    "aws_cognito_identity_pool_id": "us-east-2:68be06f6-b227-46b1-b1e2-84462815da73",
+    "aws_cognito_identity_pool_id": "us-east-2:c296b81c-75ce-4c5f-a598-dae763e409e7",
     "aws_cognito_region": "us-east-2",
-    "aws_user_pools_id": "us-east-2_Re2yMBZ1A",
-    "aws_user_pools_web_client_id": "7gg90l4e73socd2cd49f0fje8n",
-    "aws_appsync_graphqlEndpoint": "https://wieh3d5xkndtxc7mcut34s2tbm.appsync-api.us-east-2.amazonaws.com/graphql",
+    "aws_user_pools_id": "us-east-2_7gcK8uXwm",
+    "aws_user_pools_web_client_id": "1p8lqkabfk45tv73s80d51feuu",
+    "aws_appsync_graphqlEndpoint": "https://wje7256rfvfe5orvnoz5oby2fi.appsync-api.us-east-2.amazonaws.com/graphql",
     "aws_appsync_region": "us-east-2",
     "aws_appsync_authenticationType": "API_KEY",
-    "aws_appsync_apiKey": "da2-qaglwyk345cjfgsbr3qxxeyl4u",
-    "aws_cloud_logic_custom": [
-        {
-            "name": "alogpatientapi",
-            "endpoint": "https://equ7owa3mf.execute-api.us-east-2.amazonaws.com/Prod",
-            "region": "us-east-2"
-        }
-    ]
+    "aws_appsync_apiKey": "da2-jtxmz2wv5vaulb53fk77qe3xum"
 };
 
 

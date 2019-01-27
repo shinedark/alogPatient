@@ -1,13 +1,7 @@
 {
     "AppSyncApiName": "alogpatient",
-    "schemaGraphql": "s3://alogatient-20190126162704-deployment/amplify-appsync-files/schema.graphql.1548554752818",
-    "ResolverBucket": "alogatient-20190126162704-deployment",
+    "schemaGraphql": "s3://alogatient-20190127120246-deployment/amplify-appsync-files/schema.graphql.1548613495597",
+    "ResolverBucket": "alogatient-20190127120246-deployment",
     "ResolverRootKey": "amplify-appsync-files",
-    "DeploymentTimestamp": "1548554752818",
-    "AuthCognitoUserPoolId": {
-        "Fn::GetAtt": [
-            "authcognito3221cd0f",
-            "Outputs.UserPoolId"
-        ]
-    }
+    "DeploymentTimestamp": "1548613495597"
 }

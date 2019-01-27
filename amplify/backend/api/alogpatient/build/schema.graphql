@@ -1,9 +1,9 @@
-type Logs {
+type Log {
   id: ID!
-  description: String!
-  log: String!
-  date: String!
-  mood: String!
+  description: String
+  log: String
+  date: String
+  mood: String
   meds: String
 }
 
@@ -12,8 +12,8 @@ enum ModelSortDirection {
   DESC
 }
 
-type ModelLogsConnection {
-  items: [Logs]
+type ModelLogConnection {
+  items: [Log]
   nextToken: String
 }
 
@@ -72,33 +72,33 @@ input ModelBooleanFilterInput {
   eq: Boolean
 }
 
-input ModelLogsFilterInput {
+input ModelLogFilterInput {
   id: ModelIDFilterInput
   description: ModelStringFilterInput
   log: ModelStringFilterInput
   date: ModelStringFilterInput
   mood: ModelStringFilterInput
   meds: ModelStringFilterInput
-  and: [ModelLogsFilterInput]
-  or: [ModelLogsFilterInput]
-  not: ModelLogsFilterInput
+  and: [ModelLogFilterInput]
+  or: [ModelLogFilterInput]
+  not: ModelLogFilterInput
 }
 
 type Query {
-  getLogs(id: ID!): Logs
-  listLogss(filter: ModelLogsFilterInput, limit: Int, nextToken: String): ModelLogsConnection
+  getLog(id: ID!): Log
+  listLogs(filter: ModelLogFilterInput, limit: Int, nextToken: String): ModelLogConnection
 }
 
-input CreateLogsInput {
+input CreateLogInput {
   id: ID
-  description: String!
-  log: String!
-  date: String!
-  mood: String!
+  description: String
+  log: String
+  date: String
+  mood: String
   meds: String
 }
 
-input UpdateLogsInput {
+input UpdateLogInput {
   id: ID!
   description: String
   log: String
@@ -107,18 +107,18 @@ input UpdateLogsInput {
   meds: String
 }
 
-input DeleteLogsInput {
+input DeleteLogInput {
   id: ID
 }
 
 type Mutation {
-  createLogs(input: CreateLogsInput!): Logs
-  updateLogs(input: UpdateLogsInput!): Logs
-  deleteLogs(input: DeleteLogsInput!): Logs
+  createLog(input: CreateLogInput!): Log
+  updateLog(input: UpdateLogInput!): Log
+  deleteLog(input: DeleteLogInput!): Log
 }
 
 type Subscription {
-  onCreateLogs: Logs @aws_subscribe(mutations: ["createLogs"])
-  onUpdateLogs: Logs @aws_subscribe(mutations: ["updateLogs"])
-  onDeleteLogs: Logs @aws_subscribe(mutations: ["deleteLogs"])
+  onCreateLog: Log @aws_subscribe(mutations: ["createLog"])
+  onUpdateLog: Log @aws_subscribe(mutations: ["updateLog"])
+  onDeleteLog: Log @aws_subscribe(mutations: ["deleteLog"])
 }

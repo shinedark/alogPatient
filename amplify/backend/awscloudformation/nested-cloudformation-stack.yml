@@ -78,26 +78,26 @@
 				}
 			}
 		},
-		"authcognito3221cd0f": {
+		"authcognito259f034b": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/alogatient-20190126162704-deployment/amplify-cfn-templates/auth/cognito3221cd0f-cloudformation-template.yml",
+				"TemplateURL": "https://s3.amazonaws.com/alogatient-20190127120246-deployment/amplify-cfn-templates/auth/cognito259f034b-cloudformation-template.yml",
 				"Parameters": {
-					"identityPoolName": "cognito3221cd0f_identitypool_3221cd0f",
+					"identityPoolName": "cognito259f034b_identitypool_259f034b",
 					"allowUnauthenticatedIdentities": false,
 					"thirdPartyAuth": false,
-					"lambdaLogPolicy": "cognito3221cd0f_lambda_log_policy",
-					"openIdLambdaRoleName": "cognito3221cd0f_openid_lambda_role",
-					"openIdRolePolicy": "cognito3221cd0f_openid_pass_role_policy",
-					"openIdLambdaIAMPolicy": "cognito3221cd0f_openid_lambda_iam_policy",
-					"openIdLogPolicy": "cognito3221cd0f_openid_lambda_log_policy",
-					"userPoolName": "cognito3221cd0f_userpool_3221cd0f",
+					"lambdaLogPolicy": "cognito259f034b_lambda_log_policy",
+					"openIdLambdaRoleName": "cognito259f034b_openid_lambda_role",
+					"openIdRolePolicy": "cognito259f034b_openid_pass_role_policy",
+					"openIdLambdaIAMPolicy": "cognito259f034b_openid_lambda_iam_policy",
+					"openIdLogPolicy": "cognito259f034b_openid_lambda_log_policy",
+					"userPoolName": "cognito259f034b_userpool_259f034b",
 					"autoVerifiedAttributes": "email",
 					"mfaConfiguration": "OFF",
 					"mfaTypes": "SMS Text Message",
-					"roleName": "cognito3221cd0f_sns-role",
-					"roleExternalId": "cognito3221cd0f_role_external_id",
-					"policyName": "cognito3221cd0f-sns-policy",
+					"roleName": "cognito259f034b_sns-role",
+					"roleExternalId": "cognito259f034b_role_external_id",
+					"policyName": "cognito259f034b-sns-policy",
 					"smsAuthenticationMessage": "Your authentication code is {####}",
 					"smsVerificationMessage": "Your verification code is {####}",
 					"emailVerificationSubject": "Your verification code",
@@ -106,24 +106,24 @@
 					"passwordPolicyMinLength": 8,
 					"passwordPolicyCharacters": "Requires Lowercase,Requires Uppercase,Requires Numbers,Requires Symbols",
 					"requiredAttributes": "email",
-					"userpoolClientName": "cognito3221cd0f_app_client",
+					"userpoolClientName": "cognito259f034b_app_client",
 					"userpoolClientGenerateSecret": true,
 					"userpoolClientRefreshTokenValidity": 30,
 					"userpoolClientReadAttributes": "email",
-					"mfaLambdaRole": "cognito3221cd0f_totp_lambda_role",
-					"mfaLambdaLogPolicy": "cognito3221cd0f_totp_lambda_log_policy",
-					"mfaPassRolePolicy": "cognito3221cd0f_totp_pass_role_policy",
-					"mfaLambdaIAMPolicy": "cognito3221cd0f_totp_lambda_iam_policy",
-					"userpoolClientLambdaRole": "cognito3221cd0f_userpoolclient_lambda_role",
-					"userpoolClientLogPolicy": "cognito3221cd0f_userpoolclient_lambda_log_policy",
-					"userpoolClientLambdaPolicy": "cognito3221cd0f_userpoolclient_lambda_iam_policy",
+					"mfaLambdaRole": "cognito259f034b_totp_lambda_role",
+					"mfaLambdaLogPolicy": "cognito259f034b_totp_lambda_log_policy",
+					"mfaPassRolePolicy": "cognito259f034b_totp_pass_role_policy",
+					"mfaLambdaIAMPolicy": "cognito259f034b_totp_lambda_iam_policy",
+					"userpoolClientLambdaRole": "cognito259f034b_userpoolclient_lambda_role",
+					"userpoolClientLogPolicy": "cognito259f034b_userpoolclient_lambda_log_policy",
+					"userpoolClientLambdaPolicy": "cognito259f034b_userpoolclient_lambda_iam_policy",
 					"userpoolClientSetAttributes": false,
 					"useDefault": "default",
-					"unAuthRoleName": "alogatient-20190126162704-unauthRole",
-					"authRoleName": "alogatient-20190126162704-authRole",
-					"unAuthRoleArn": "arn:aws:iam::826339950142:role/alogatient-20190126162704-unauthRole",
-					"authRoleArn": "arn:aws:iam::826339950142:role/alogatient-20190126162704-authRole",
-					"resourceName": "cognito3221cd0f",
+					"unAuthRoleName": "alogatient-20190127120246-unauthRole",
+					"authRoleName": "alogatient-20190127120246-authRole",
+					"unAuthRoleArn": "arn:aws:iam::826339950142:role/alogatient-20190127120246-unauthRole",
+					"authRoleArn": "arn:aws:iam::826339950142:role/alogatient-20190127120246-authRole",
+					"resourceName": "cognito259f034b",
 					"authSelections": "identityPoolAndUserPool"
 				}
 			}
@@ -131,41 +131,14 @@
 		"apialogpatient": {
 			"Type": "AWS::CloudFormation::Stack",
 			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/alogatient-20190126162704-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+				"TemplateURL": "https://s3.amazonaws.com/alogatient-20190127120246-deployment/amplify-cfn-templates/api/cloudformation-template.json",
 				"Parameters": {
 					"AppSyncApiName": "alogpatient",
-					"schemaGraphql": "s3://alogatient-20190126162704-deployment/amplify-appsync-files/schema.graphql.1548554752818",
-					"ResolverBucket": "alogatient-20190126162704-deployment",
+					"schemaGraphql": "s3://alogatient-20190127120246-deployment/amplify-appsync-files/schema.graphql.1548613495597",
+					"ResolverBucket": "alogatient-20190127120246-deployment",
 					"ResolverRootKey": "amplify-appsync-files",
-					"DeploymentTimestamp": "1548554752818"
+					"DeploymentTimestamp": "1548613495597"
 				}
-			}
-		},
-		"apialogpatientapi": {
-			"Type": "AWS::CloudFormation::Stack",
-			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/alogatient-20190126162704-deployment/amplify-cfn-templates/api/alogpatientapi-cloudformation-template.json",
-				"Parameters": {
-					"functionalogpatientfunctionName": {
-						"Fn::GetAtt": [
-							"functionalogpatientfunction",
-							"Outputs.Name"
-						]
-					},
-					"functionalogpatientfunctionArn": {
-						"Fn::GetAtt": [
-							"functionalogpatientfunction",
-							"Outputs.Arn"
-						]
-					}
-				}
-			}
-		},
-		"functionalogpatientfunction": {
-			"Type": "AWS::CloudFormation::Stack",
-			"Properties": {
-				"TemplateURL": "https://s3.amazonaws.com/alogatient-20190126162704-deployment/amplify-cfn-templates/function/alogpatientfunction-cloudformation-template.json",
-				"Parameters": {}
 			}
 		}
 	},

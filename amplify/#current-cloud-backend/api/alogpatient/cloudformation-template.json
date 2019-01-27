@@ -78,20 +78,20 @@
                         {
                             "Ref": "APIKeyExpirationEpoch"
                         },
-                        1549159552
+                        1549218295
                     ]
                 }
             },
             "Condition": "APIKeyExpirationEpochIsNotNegOne"
         },
-        "LogsTable": {
+        "LogTable": {
             "Type": "AWS::DynamoDB::Table",
             "Properties": {
                 "TableName": {
                     "Fn::Join": [
                         "-",
                         [
-                            "Logs",
+                            "Log",
                             {
                                 "Fn::GetAtt": [
                                     "GraphQLAPI",
@@ -126,14 +126,14 @@
                 }
             }
         },
-        "LogsIAMRole": {
+        "LogIAMRole": {
             "Type": "AWS::IAM::Role",
             "Properties": {
                 "RoleName": {
                     "Fn::Join": [
                         "-",
                         [
-                            "LogsTable",
+                            "LogTable",
                             "role",
                             {
                                 "Fn::GetAtt": [
@@ -177,7 +177,7 @@
                                     "Resource": [
                                         {
                                             "Fn::GetAtt": [
-                                                "LogsTable",
+                                                "LogTable",
                                                 "Arn"
                                             ]
                                         },
@@ -187,7 +187,7 @@
                                                 [
                                                     {
                                                         "Fn::GetAtt": [
-                                                            "LogsTable",
+                                                            "LogTable",
                                                             "Arn"
                                                         ]
                                                     },
@@ -203,7 +203,7 @@
                 ]
             }
         },
-        "LogsDataSource": {
+        "LogDataSource": {
             "Type": "AWS::AppSync::DataSource",
             "Properties": {
                 "ApiId": {
@@ -212,11 +212,11 @@
                         "ApiId"
                     ]
                 },
-                "Name": "LogsTable",
+                "Name": "LogTable",
                 "Type": "AMAZON_DYNAMODB",
                 "ServiceRoleArn": {
                     "Fn::GetAtt": [
-                        "LogsIAMRole",
+                        "LogIAMRole",
                         "Arn"
                     ]
                 },
@@ -229,7 +229,7 @@
                                     ":",
                                     {
                                         "Fn::GetAtt": [
-                                            "LogsTable",
+                                            "LogTable",
                                             "Arn"
                                         ]
                                     }
@@ -238,16 +238,16 @@
                         ]
                     },
                     "TableName": {
-                        "Ref": "LogsTable"
+                        "Ref": "LogTable"
                     }
                 }
             },
             "DependsOn": [
-                "LogsTable",
-                "LogsIAMRole"
+                "LogTable",
+                "LogIAMRole"
             ]
         },
-        "GetLogsResolver": {
+        "GetLogResolver": {
             "Type": "AWS::AppSync::Resolver",
             "Properties": {
                 "ApiId": {
@@ -258,11 +258,11 @@
                 },
                 "DataSourceName": {
                     "Fn::GetAtt": [
-                        "LogsDataSource",
+                        "LogDataSource",
                         "Name"
                     ]
                 },
-                "FieldName": "getLogs",
+                "FieldName": "getLog",
                 "TypeName": "Query",
                 "RequestMappingTemplateS3Location": {
                     "Fn::Join": [
@@ -284,7 +284,7 @@
                                                 ".",
                                                 [
                                                     "Query",
-                                                    "getLogs",
+                                                    "getLog",
                                                     "request",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -318,7 +318,7 @@
                                                 ".",
                                                 [
                                                     "Query",
-                                                    "getLogs",
+                                                    "getLog",
                                                     "response",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -335,7 +335,7 @@
             },
             "DependsOn": "GraphQLSchema"
         },
-        "ListLogsResolver": {
+        "ListLogResolver": {
             "Type": "AWS::AppSync::Resolver",
             "Properties": {
                 "ApiId": {
@@ -346,11 +346,11 @@
                 },
                 "DataSourceName": {
                     "Fn::GetAtt": [
-                        "LogsDataSource",
+                        "LogDataSource",
                         "Name"
                     ]
                 },
-                "FieldName": "listLogss",
+                "FieldName": "listLogs",
                 "TypeName": "Query",
                 "RequestMappingTemplateS3Location": {
                     "Fn::Join": [
@@ -372,7 +372,7 @@
                                                 ".",
                                                 [
                                                     "Query",
-                                                    "listLogss",
+                                                    "listLogs",
                                                     "request",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -406,7 +406,7 @@
                                                 ".",
                                                 [
                                                     "Query",
-                                                    "listLogss",
+                                                    "listLogs",
                                                     "response",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -423,7 +423,7 @@
             },
             "DependsOn": "GraphQLSchema"
         },
-        "CreateLogsResolver": {
+        "CreateLogResolver": {
             "Type": "AWS::AppSync::Resolver",
             "Properties": {
                 "ApiId": {
@@ -434,11 +434,11 @@
                 },
                 "DataSourceName": {
                     "Fn::GetAtt": [
-                        "LogsDataSource",
+                        "LogDataSource",
                         "Name"
                     ]
                 },
-                "FieldName": "createLogs",
+                "FieldName": "createLog",
                 "TypeName": "Mutation",
                 "RequestMappingTemplateS3Location": {
                     "Fn::Join": [
@@ -460,7 +460,7 @@
                                                 ".",
                                                 [
                                                     "Mutation",
-                                                    "createLogs",
+                                                    "createLog",
                                                     "request",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -494,7 +494,7 @@
                                                 ".",
                                                 [
                                                     "Mutation",
-                                                    "createLogs",
+                                                    "createLog",
                                                     "response",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -511,7 +511,7 @@
             },
             "DependsOn": "GraphQLSchema"
         },
-        "UpdateLogsResolver": {
+        "UpdateLogResolver": {
             "Type": "AWS::AppSync::Resolver",
             "Properties": {
                 "ApiId": {
@@ -522,11 +522,11 @@
                 },
                 "DataSourceName": {
                     "Fn::GetAtt": [
-                        "LogsDataSource",
+                        "LogDataSource",
                         "Name"
                     ]
                 },
-                "FieldName": "updateLogs",
+                "FieldName": "updateLog",
                 "TypeName": "Mutation",
                 "RequestMappingTemplateS3Location": {
                     "Fn::Join": [
@@ -548,7 +548,7 @@
                                                 ".",
                                                 [
                                                     "Mutation",
-                                                    "updateLogs",
+                                                    "updateLog",
                                                     "request",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -582,7 +582,7 @@
                                                 ".",
                                                 [
                                                     "Mutation",
-                                                    "updateLogs",
+                                                    "updateLog",
                                                     "response",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -599,7 +599,7 @@
             },
             "DependsOn": "GraphQLSchema"
         },
-        "DeleteLogsResolver": {
+        "DeleteLogResolver": {
             "Type": "AWS::AppSync::Resolver",
             "Properties": {
                 "ApiId": {
@@ -610,11 +610,11 @@
                 },
                 "DataSourceName": {
                     "Fn::GetAtt": [
-                        "LogsDataSource",
+                        "LogDataSource",
                         "Name"
                     ]
                 },
-                "FieldName": "deleteLogs",
+                "FieldName": "deleteLog",
                 "TypeName": "Mutation",
                 "RequestMappingTemplateS3Location": {
                     "Fn::Join": [
@@ -636,7 +636,7 @@
                                                 ".",
                                                 [
                                                     "Mutation",
-                                                    "deleteLogs",
+                                                    "deleteLog",
                                                     "request",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
@@ -670,7 +670,7 @@
                                                 ".",
                                                 [
                                                     "Mutation",
-                                                    "deleteLogs",
+                                                    "deleteLog",
                                                     "response",
                                                     {
                                                         "Ref": "DeploymentTimestamp"
