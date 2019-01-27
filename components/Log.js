@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View} from 'react-native';
+import { View, Alert} from 'react-native';
 import { 
   Container, 
   Content,  
@@ -106,6 +106,7 @@ export default class Log extends Component {
       if (logsAdded.description === '' || logsAdded.log === ''|| logsAdded.date === ''||logsAdded.meds === true) return
       const logs = [...this.state.logs, logsAdded]
       this.setState({ logs, description: '', log: '',  mood:'',  date: '',  meds: false  })
+      Alert.alert('Log Saved')
       try {
         await API.graphql(graphqlOperation(createLog, logsAdded))
         console.log('logs successfully created.')
@@ -113,6 +114,7 @@ export default class Log extends Component {
         console.log('error creating log..', err)
       }
     }
+
 
   render() {
     return (
@@ -155,17 +157,6 @@ export default class Log extends Component {
           <Button primary  full onPress={this.createLog}>
             <Text>Save Log</Text>
           </Button>
-          {
-                    this.state.logs.map((logsAdded, index) => (
-                      <Card key={index} >
-                        <CardItem><Text>{logsAdded.description}</Text></CardItem>
-                        <CardItem><Text>{logsAdded.log}</Text></CardItem>
-                        <CardItem><Text>{logsAdded.meds.toString()}</Text></CardItem>
-                        <CardItem><Text>{logsAdded.date}</Text></CardItem>
-                        <CardItem><Text>{logsAdded.mood}</Text></CardItem>
-                      </Card>
-                    ))
-                  }
         </Content>
       </Container>
     );
