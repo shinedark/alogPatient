@@ -3,7 +3,7 @@ import { View} from 'react-native';
 import { CardSection } from './common';
 import { Text , Content , Card, Container} from 'native-base';
 
-import API, { graphqlOperation, subscriptions  } from '@aws-amplify/api';
+import API, { graphqlOperation  } from '@aws-amplify/api';
 
 
 
@@ -23,6 +23,7 @@ const listLogs = `
   }`
 
  
+
 export default class Events extends Component {
   
  state = {
@@ -35,33 +36,30 @@ export default class Events extends Component {
     }
 
 
-  async componentDidMount() {
-      try {
-        const graphqldata = await API.graphql(graphqlOperation(listLogs))
-        console.log('graphqldata:', graphqldata)
-        this.setState({ logs: graphqldata.data.listLogs.items })
-      } catch (err) {
-        console.log('error: ', err)
-      }
+  async componentWillMount() {
+      const allLogs = await API.graphql(graphqlOperation(listLogs))
+      console.log(allLogs)
+      this.setState({ logs: allLogs.data.listLogs.items})
     }
 
   render() {
     return (
       <Container>
         <Content>
-          {
-            this.state.logs.map((logsAdded, index) => (
-              <Card key={index}>
-                <CardSection><Text>{logsAdded.description}</Text></CardSection>
-                <CardSection><Text>{logsAdded.log}</Text></CardSection>
-                <CardSection><Text>{logsAdded.meds.toString()}</Text></CardSection>
-                <CardSection><Text>{logsAdded.date}</Text></CardSection>
-                <Card style={{backgroundColor: logsAdded.mood, padding: 10}}></Card>
-              </Card>
-            ))
-          }
+            {
+              this.state.logs.map((logsAdded, index) => (
+                <Card key={index}>
+                  <CardSection><Text>Description: {logsAdded.description}</Text></CardSection>
+                  <CardSection><Text>Log: {logsAdded.log}</Text></CardSection>
+                  <CardSection><Text>Did Take Meds: {logsAdded.meds.toString()}</Text></CardSection>
+                  <CardSection><Text>Date: {logsAdded.date}</Text></CardSection>
+                  <Card style={{backgroundColor: logsAdded.mood, padding: 10}}></Card>
+                </Card>
+              ))
+            }
         </Content>
       </Container>
     );
   }
 }
+

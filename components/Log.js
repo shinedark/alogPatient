@@ -37,6 +37,7 @@ const listLogs = `
       }
     }
   }`
+  
 const createLog = `
   mutation($description: String, $log: String, $mood: String, $date: String , $meds: String ) {
     createLog(input: {
