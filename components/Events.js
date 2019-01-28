@@ -3,7 +3,9 @@ import { View} from 'react-native';
 import { CardSection } from './common';
 import { Text , Content , Card, Container} from 'native-base';
 
-import API, { graphqlOperation } from '@aws-amplify/api';
+import API, { graphqlOperation, subscriptions  } from '@aws-amplify/api';
+
+
 
 
 const listLogs = `
@@ -20,6 +22,7 @@ const listLogs = `
     }
   }`
 
+ 
 export default class Events extends Component {
   
  state = {

@@ -134,11 +134,38 @@
 				"TemplateURL": "https://s3.amazonaws.com/alogatient-20190127120246-deployment/amplify-cfn-templates/api/cloudformation-template.json",
 				"Parameters": {
 					"AppSyncApiName": "alogpatient",
-					"schemaGraphql": "s3://alogatient-20190127120246-deployment/amplify-appsync-files/schema.graphql.1548613495597",
+					"schemaGraphql": "s3://alogatient-20190127120246-deployment/amplify-appsync-files/schema.graphql.1548638022892",
 					"ResolverBucket": "alogatient-20190127120246-deployment",
 					"ResolverRootKey": "amplify-appsync-files",
-					"DeploymentTimestamp": "1548613495597"
+					"DeploymentTimestamp": "1548638022892"
 				}
+			}
+		},
+		"apialogapi": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/alogatient-20190127120246-deployment/amplify-cfn-templates/api/alogapi-cloudformation-template.json",
+				"Parameters": {
+					"functionalogpatientc3d75cb3Name": {
+						"Fn::GetAtt": [
+							"functionalogpatientc3d75cb3",
+							"Outputs.Name"
+						]
+					},
+					"functionalogpatientc3d75cb3Arn": {
+						"Fn::GetAtt": [
+							"functionalogpatientc3d75cb3",
+							"Outputs.Arn"
+						]
+					}
+				}
+			}
+		},
+		"functionalogpatientc3d75cb3": {
+			"Type": "AWS::CloudFormation::Stack",
+			"Properties": {
+				"TemplateURL": "https://s3.amazonaws.com/alogatient-20190127120246-deployment/amplify-cfn-templates/function/alogpatientc3d75cb3-cloudformation-template.json",
+				"Parameters": {}
 			}
 		}
 	},

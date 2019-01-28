@@ -9,7 +9,14 @@ const awsmobile = {
     "aws_appsync_graphqlEndpoint": "https://wje7256rfvfe5orvnoz5oby2fi.appsync-api.us-east-2.amazonaws.com/graphql",
     "aws_appsync_region": "us-east-2",
     "aws_appsync_authenticationType": "API_KEY",
-    "aws_appsync_apiKey": "da2-jtxmz2wv5vaulb53fk77qe3xum"
+    "aws_appsync_apiKey": "da2-jtxmz2wv5vaulb53fk77qe3xum",
+    "aws_cloud_logic_custom": [
+        {
+            "name": "alogapi",
+            "endpoint": "https://zd3umki0ck.execute-api.us-east-2.amazonaws.com/Prod",
+            "region": "us-east-2"
+        }
+    ]
 };
 
 
