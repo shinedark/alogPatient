@@ -19,7 +19,7 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/alogatient-20190127120246-deployment/amplify-cfn-templates/auth/cognito259f034b-cloudformation-template.yml",
 				"logicalId": "authcognito259f034b"
 			},
-			"lastPushTimeStamp": "2019-01-27T18:27:30.951Z",
+			"lastPushTimeStamp": "2019-01-28T01:15:16.598Z",
 			"output": {
 				"AppClientSecret": "5futc4ee0nm1auie0n25inrnoalh2nu3mnruft1cutgmctil3rt",
 				"UserPoolId": "us-east-2_7gcK8uXwm",
@@ -46,8 +46,54 @@
 				"s3TemplateURL": "https://s3.amazonaws.com/alogatient-20190127120246-deployment/amplify-cfn-templates/api/cloudformation-template.json",
 				"logicalId": "apialogpatient"
 			},
-			"lastPushTimeStamp": "2019-01-27T18:27:30.954Z",
-			"lastPushDirHash": "k4NOTnJvwtg5YRuydpKUQ1pGhU8="
+			"lastPushTimeStamp": "2019-01-28T01:15:16.607Z",
+			"lastPushDirHash": "NtD0TViJS9TBZzZ6crc5WxQRG90="
+		},
+		"alogapi": {
+			"service": "API Gateway",
+			"providerPlugin": "awscloudformation",
+			"dependsOn": [
+				{
+					"category": "function",
+					"resourceName": "alogpatientc3d75cb3",
+					"attributes": [
+						"Name",
+						"Arn"
+					]
+				}
+			],
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/alogatient-20190127120246-deployment/amplify-cfn-templates/api/alogapi-cloudformation-template.json",
+				"logicalId": "apialogapi"
+			},
+			"lastPushTimeStamp": "2019-01-28T01:15:16.607Z",
+			"output": {
+				"ApiName": "alogapi",
+				"RootUrl": "https://zd3umki0ck.execute-api.us-east-2.amazonaws.com/Prod"
+			},
+			"lastPushDirHash": "zrqocTw7E3a0Pwugi4cTSXmz1NU="
+		}
+	},
+	"function": {
+		"alogpatientc3d75cb3": {
+			"service": "Lambda",
+			"providerPlugin": "awscloudformation",
+			"build": true,
+			"dependsOn": [],
+			"lastBuildTimeStamp": "2019-01-28T01:13:37.181Z",
+			"lastPackageTimeStamp": "2019-01-28T01:13:38.190Z",
+			"distZipFilename": "alogpatientc3d75cb3-1548638017-latest-build.zip",
+			"providerMetadata": {
+				"s3TemplateURL": "https://s3.amazonaws.com/alogatient-20190127120246-deployment/amplify-cfn-templates/function/alogpatientc3d75cb3-cloudformation-template.json",
+				"logicalId": "functionalogpatientc3d75cb3"
+			},
+			"lastPushTimeStamp": "2019-01-28T01:15:16.607Z",
+			"output": {
+				"Region": "us-east-2",
+				"Arn": "arn:aws:lambda:us-east-2:826339950142:function:alogpatientc3d75cb3",
+				"Name": "alogpatientc3d75cb3"
+			},
+			"lastPushDirHash": "45C+w1yTuuc0863JuhYygStNOYc="
 		}
 	}
 }

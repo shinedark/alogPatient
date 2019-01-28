@@ -1,0 +1,34 @@
+{
+    "paths": [
+        {
+            "name": "/logs",
+            "lambdaFunction": "alogpatientc3d75cb3",
+            "privacy": {
+                "open": true
+            }
+        }
+    ],
+    "resourceName": "alogapi",
+    "apiName": "alogpatientb44e1722",
+    "functionArns": [
+        {
+            "lambdaFunction": "alogpatientc3d75cb3"
+        }
+    ],
+    "privacy": {
+        "auth": 0,
+        "unauth": 0,
+        "authRoleName": "alogatient-20190127120246-authRole",
+        "unAuthRoleName": "alogatient-20190127120246-unauthRole"
+    },
+    "dependsOn": [
+        {
+            "category": "function",
+            "resourceName": "alogpatientc3d75cb3",
+            "attributes": [
+                "Name",
+                "Arn"
+            ]
+        }
+    ]
+}

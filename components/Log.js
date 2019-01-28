@@ -71,11 +71,8 @@ export default class Log extends Component {
   }
 
   async componentDidMount() {
-      setInterval( () => {
-            this.setState({
-              date : new Date().toLocaleString()
-            })
-          },1000)
+    this.setState({date : new Date().toLocaleString()})
+
       try {
         const graphqldata = await API.graphql(graphqlOperation(listLogs))
         console.log('graphqldata:', graphqldata)
@@ -109,7 +106,7 @@ export default class Log extends Component {
   createLog = async () => {
 
       const logsAdded = this.state
-      if (logsAdded.description === '' || logsAdded.log === ''|| logsAdded.date === '' ||logsAdded.medsCheck === false ||logsAdded.mood === 'green'||logsAdded.meds === '') return
+      if (logsAdded.description === '' || logsAdded.log === ''|| logsAdded.date === '' ||logsAdded.medsCheck === Boolean ||logsAdded.mood === 'green'||logsAdded.meds === '') return
       const logs = [...this.state.logs, logsAdded]
       this.setState({ logs, description: '', log: '',  mood:'',  date: '',  medsCheck: false , meds: '' })
       try {
