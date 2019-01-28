@@ -109,7 +109,7 @@ export default class Log extends Component {
       const logsAdded = this.state
       if (logsAdded.description === '' || logsAdded.log === ''|| logsAdded.date === '' ||logsAdded.medsCheck === Boolean ||logsAdded.mood === 'green'||logsAdded.meds === '') return
       const logs = [...this.state.logs, logsAdded]
-      this.setState({ logs, description: '', log: '',  mood:'',  date: '',  medsCheck: false , meds: '' })
+      this.setState({ logs:[], description: '', log: '',  mood:'',  date: '',  medsCheck: false , meds: '' })
       try {
         await API.graphql(graphqlOperation(createLog, logsAdded))
         console.log('logs successfully created.')
