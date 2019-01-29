@@ -22,21 +22,23 @@ import {
 } from 'native-base';
 
 import API, { graphqlOperation } from '@aws-amplify/api';
+import * as queries from '../graphql/queries';
+import * as mutations from '../graphql/mutations';
 
 
-const listLogs = `
-  query Logs{
-    listLogs{
-      items{
-        id
-        log
-        description
-        mood
-        date
-        meds
-      }
-    }
-  }`
+// const listLogs = `
+//   query Logs{
+//     listLogs{
+//       items{
+//         id
+//         log
+//         description
+//         mood
+//         date
+//         meds
+//       }
+//     }
+//   }`
   
 const createLog = `
   mutation($description: String, $log: String, $mood: String, $date: String , $meds: String ) {
@@ -75,8 +77,8 @@ export default class Log extends Component {
     this.setState({date : new Date().toLocaleString()})
 
       try {
-        const graphqldata = await API.graphql(graphqlOperation(listLogs))
-        console.log('graphqldata:', graphqldata)
+        const graphqldata = await API.graphql(graphqlOperation(queries.listLogs))
+        // console.log('graphqldata:', graphqldata)
         this.setState({ logs: graphqldata.data.listLogs.items })
       } catch (err) {
         console.log('error: ', err)
@@ -95,7 +97,7 @@ export default class Log extends Component {
       console.log('cheked on');
 
     } else {
-      this.setState({medsCheck: false, meds: 'No'});
+      this.setState({medsCheck: false, meds: ''});
       console.log('cheked off');
     }
   }
@@ -107,7 +109,7 @@ export default class Log extends Component {
   createLog = async () => {
 
       const logsAdded = this.state
-      if (logsAdded.description === '' || logsAdded.log === ''|| logsAdded.date === '' ||logsAdded.medsCheck === Boolean ||logsAdded.mood === 'green'||logsAdded.meds === '') return
+      if (logsAdded.description === '' || logsAdded.log === ''|| logsAdded.date === '' ||logsAdded.medsCheck === false ||logsAdded.mood === 'green'||logsAdded.meds === '') return
       const logs = [...this.state.logs, logsAdded]
       this.setState({ logs:[], description: '', log: '',  mood:'',  date: '',  medsCheck: false , meds: '' })
       try {

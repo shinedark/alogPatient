@@ -1,0 +1,17 @@
+projects:
+  alogpatient:
+    schemaPath: src/graphql/schema.json
+    includes:
+      - src/graphql/**/*.js
+    excludes:
+      - ./amplify/**
+    extensions:
+      amplify:
+        graphQLApiId: 25jlqumnwvdujnn37mijg2522y
+        codeGenTarget: javascript
+        generatedFileName: ''
+        docsFilePath: src/graphql
+        region: us-east-2
+      endpoints:
+        prod: >-
+          https://wje7256rfvfe5orvnoz5oby2fi.appsync-api.us-east-2.amazonaws.com/graphql

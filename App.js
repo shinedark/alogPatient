@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import { Container, Header, Tab, Tabs, TabHeading, Icon, Text , Body, Title} from 'native-base';
-import Log from './components/Log';
-import Events from './components/Events';
+import Log from './src/components/Log';
+import Events from './src/components/Events';
 
 
 
