@@ -65,7 +65,8 @@ export default class Log extends Component {
       this.state = {
         mood: '',
         date: '',
-        medsCheck: false,
+        medsCheckY: false,
+        medsCheckN: false,
         meds: '',
         description: '',
         log: '',
@@ -91,13 +92,24 @@ export default class Log extends Component {
       });
     }
 
-  medCheck = () => {
-    if (!this.state.meds) {
-      this.setState({medsCheck: true, meds:'Yes' });
+  medCheckY = () => {
+    if (!this.state.medsCheckY) {
+      this.setState({medsCheckY: true, meds:'Yes' });
       console.log('cheked on');
 
     } else {
-      this.setState({medsCheck: false, meds: ''});
+      this.setState({medsCheckY: false, meds: ''});
+      console.log('cheked off');
+    }
+  }
+
+  medCheckN = () => {
+    if (!this.state.medsCheckN) {
+      this.setState({medsCheckN: true, meds:'No' });
+      console.log('cheked on');
+
+    } else {
+      this.setState({medsCheckN: false, meds: ''});
       console.log('cheked off');
     }
   }
@@ -109,9 +121,9 @@ export default class Log extends Component {
   createLog = async () => {
 
       const logsAdded = this.state
-      if (logsAdded.description === '' || logsAdded.log === ''|| logsAdded.date === '' ||logsAdded.medsCheck === false ||logsAdded.mood === 'green'||logsAdded.meds === '') return
+      if (logsAdded.description === '' || logsAdded.log === ''|| logsAdded.date === '' ||logsAdded.mood === ''||logsAdded.meds === ''||logsAdded.medsCheckN === true||logsAdded.medsCheckN === true) return
       const logs = [...this.state.logs, logsAdded]
-      this.setState({ logs:[], description: '', log: '',  mood:'',  date: '',  medsCheck: false , meds: '' })
+      this.setState({ logs:[], description: '', log: '',  mood:'',  date: '',  medsCheckN: false , medsCheckY: false , meds: '' })
       try {
         await API.graphql(graphqlOperation(createLog, logsAdded))
         console.log('logs successfully created.')
@@ -152,11 +164,19 @@ export default class Log extends Component {
             </Picker>
           </Form>
           <Form>
+            <Body>
+              <Text>Did you take any medication?</Text>
+            </Body>
             <ListItem>
-              <CheckBox checked={this.state.medsCheck} color="blue" onPress={this.medCheck} />
-                <Body>
-                  <Text>Did you take any medication?</Text>
-                </Body>
+              <Body>
+                <Text>Yes</Text>
+              </Body>
+              <CheckBox checked={this.state.medsCheckY} color="blue" onPress={this.medCheckY} />
+              <Body>
+                <Text>No</Text>
+              </Body>
+              <CheckBox checked={this.state.medsCheckN} color="blue" onPress={this.medCheckN} />
+                
             </ListItem>
           </Form>
           <H3 style={{padding: 10}}>{this.state.date}</H3>
