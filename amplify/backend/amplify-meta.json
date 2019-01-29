@@ -1,99 +1,93 @@
 {
-	"providers": {
-		"awscloudformation": {
-			"AuthRoleName": "alogatient-20190127120246-authRole",
-			"UnauthRoleArn": "arn:aws:iam::826339950142:role/alogatient-20190127120246-unauthRole",
-			"AuthRoleArn": "arn:aws:iam::826339950142:role/alogatient-20190127120246-authRole",
-			"Region": "us-east-2",
-			"DeploymentBucketName": "alogatient-20190127120246-deployment",
-			"UnauthRoleName": "alogatient-20190127120246-unauthRole",
-			"StackName": "alogatient-20190127120246",
-			"StackId": "arn:aws:cloudformation:us-east-2:826339950142:stack/alogatient-20190127120246/c092f470-225d-11e9-8f9c-025c218c397c"
-		}
-	},
-	"auth": {
-		"cognito259f034b": {
-			"service": "Cognito",
-			"providerPlugin": "awscloudformation",
-			"providerMetadata": {
-				"s3TemplateURL": "https://s3.amazonaws.com/alogatient-20190127120246-deployment/amplify-cfn-templates/auth/cognito259f034b-cloudformation-template.yml",
-				"logicalId": "authcognito259f034b"
-			},
-			"lastPushTimeStamp": "2019-01-28T01:15:16.598Z",
-			"output": {
-				"AppClientSecret": "5futc4ee0nm1auie0n25inrnoalh2nu3mnruft1cutgmctil3rt",
-				"UserPoolId": "us-east-2_7gcK8uXwm",
-				"AppClientIDWeb": "1p8lqkabfk45tv73s80d51feuu",
-				"AppClientID": "1hnt8iguqsdm3v25c1i1rg79h4",
-				"IdentityPoolId": "us-east-2:c296b81c-75ce-4c5f-a598-dae763e409e7",
-				"IdentityPoolName": "cognito259f034b_identitypool_259f034b",
-				"UserPoolName": "cognito259f034b_userpool_259f034b"
-			},
-			"lastPushDirHash": "ZBOzaVRICs5zDw+EcI0KVpQK4gM="
-		}
-	},
-	"api": {
-		"alogpatient": {
-			"service": "AppSync",
-			"providerPlugin": "awscloudformation",
-			"output": {
-				"securityType": "API_KEY",
-				"GraphQLAPIIdOutput": "25jlqumnwvdujnn37mijg2522y",
-				"GraphQLAPIEndpointOutput": "https://wje7256rfvfe5orvnoz5oby2fi.appsync-api.us-east-2.amazonaws.com/graphql",
-				"GraphQLAPIKeyOutput": "da2-jtxmz2wv5vaulb53fk77qe3xum"
-			},
-			"providerMetadata": {
-				"s3TemplateURL": "https://s3.amazonaws.com/alogatient-20190127120246-deployment/amplify-cfn-templates/api/cloudformation-template.json",
-				"logicalId": "apialogpatient"
-			},
-			"lastPushTimeStamp": "2019-01-28T01:15:16.607Z",
-			"lastPushDirHash": "NtD0TViJS9TBZzZ6crc5WxQRG90="
-		},
-		"alogapi": {
-			"service": "API Gateway",
-			"providerPlugin": "awscloudformation",
-			"dependsOn": [
-				{
-					"category": "function",
-					"resourceName": "alogpatientc3d75cb3",
-					"attributes": [
-						"Name",
-						"Arn"
-					]
-				}
-			],
-			"providerMetadata": {
-				"s3TemplateURL": "https://s3.amazonaws.com/alogatient-20190127120246-deployment/amplify-cfn-templates/api/alogapi-cloudformation-template.json",
-				"logicalId": "apialogapi"
-			},
-			"lastPushTimeStamp": "2019-01-28T01:15:16.607Z",
-			"output": {
-				"ApiName": "alogapi",
-				"RootUrl": "https://zd3umki0ck.execute-api.us-east-2.amazonaws.com/Prod"
-			},
-			"lastPushDirHash": "zrqocTw7E3a0Pwugi4cTSXmz1NU="
-		}
-	},
-	"function": {
-		"alogpatientc3d75cb3": {
-			"service": "Lambda",
-			"providerPlugin": "awscloudformation",
-			"build": true,
-			"dependsOn": [],
-			"lastBuildTimeStamp": "2019-01-28T01:13:37.181Z",
-			"lastPackageTimeStamp": "2019-01-28T01:13:38.190Z",
-			"distZipFilename": "alogpatientc3d75cb3-1548638017-latest-build.zip",
-			"providerMetadata": {
-				"s3TemplateURL": "https://s3.amazonaws.com/alogatient-20190127120246-deployment/amplify-cfn-templates/function/alogpatientc3d75cb3-cloudformation-template.json",
-				"logicalId": "functionalogpatientc3d75cb3"
-			},
-			"lastPushTimeStamp": "2019-01-28T01:15:16.607Z",
-			"output": {
-				"Region": "us-east-2",
-				"Arn": "arn:aws:lambda:us-east-2:826339950142:function:alogpatientc3d75cb3",
-				"Name": "alogpatientc3d75cb3"
-			},
-			"lastPushDirHash": "45C+w1yTuuc0863JuhYygStNOYc="
-		}
-	}
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "alogatient-20190127120246-authRole",
+      "UnauthRoleArn": "arn:aws:iam::826339950142:role/alogatient-20190127120246-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::826339950142:role/alogatient-20190127120246-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "alogatient-20190127120246-deployment",
+      "UnauthRoleName": "alogatient-20190127120246-unauthRole",
+      "StackName": "alogatient-20190127120246",
+      "StackId": "arn:aws:cloudformation:us-east-2:826339950142:stack/alogatient-20190127120246/c092f470-225d-11e9-8f9c-025c218c397c"
+    }
+  },
+  "auth": {
+    "cognito259f034b": {
+      "service": "Cognito",
+      "providerPlugin": "awscloudformation",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/alogatient-20190127120246-deployment/amplify-cfn-templates/auth/cognito259f034b-cloudformation-template.yml",
+        "logicalId": "authcognito259f034b"
+      },
+      "lastPushTimeStamp": "2019-01-28T01:15:16.598Z",
+      "output": {
+        "AppClientSecret": "5futc4ee0nm1auie0n25inrnoalh2nu3mnruft1cutgmctil3rt",
+        "UserPoolId": "us-east-2_7gcK8uXwm",
+        "AppClientIDWeb": "1p8lqkabfk45tv73s80d51feuu",
+        "AppClientID": "1hnt8iguqsdm3v25c1i1rg79h4",
+        "IdentityPoolId": "us-east-2:c296b81c-75ce-4c5f-a598-dae763e409e7",
+        "IdentityPoolName": "cognito259f034b_identitypool_259f034b",
+        "UserPoolName": "cognito259f034b_userpool_259f034b"
+      },
+      "lastPushDirHash": "ZBOzaVRICs5zDw+EcI0KVpQK4gM="
+    }
+  },
+  "api": {
+    "alogpatient": {
+      "service": "AppSync",
+      "output": {
+        "securityType": "API_KEY",
+        "GraphQLAPIIdOutput": "25jlqumnwvdujnn37mijg2522y",
+        "GraphQLAPIEndpointOutput": "https://wje7256rfvfe5orvnoz5oby2fi.appsync-api.us-east-2.amazonaws.com/graphql",
+        "GraphQLAPIKeyOutput": "da2-jtxmz2wv5vaulb53fk77qe3xum"
+      },
+      "lastPushTimeStamp": "2019-01-29T00:00:50.891Z"
+    },
+    "alogapi": {
+      "service": "API Gateway",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [
+        {
+          "category": "function",
+          "resourceName": "alogpatientc3d75cb3",
+          "attributes": [
+            "Name",
+            "Arn"
+          ]
+        }
+      ],
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/alogatient-20190127120246-deployment/amplify-cfn-templates/api/alogapi-cloudformation-template.json",
+        "logicalId": "apialogapi"
+      },
+      "lastPushTimeStamp": "2019-01-28T01:15:16.607Z",
+      "output": {
+        "ApiName": "alogapi",
+        "RootUrl": "https://zd3umki0ck.execute-api.us-east-2.amazonaws.com/Prod"
+      },
+      "lastPushDirHash": "zrqocTw7E3a0Pwugi4cTSXmz1NU="
+    }
+  },
+  "function": {
+    "alogpatientc3d75cb3": {
+      "service": "Lambda",
+      "providerPlugin": "awscloudformation",
+      "build": true,
+      "dependsOn": [],
+      "lastBuildTimeStamp": "2019-01-28T01:13:37.181Z",
+      "lastPackageTimeStamp": "2019-01-28T01:13:38.190Z",
+      "distZipFilename": "alogpatientc3d75cb3-1548638017-latest-build.zip",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/alogatient-20190127120246-deployment/amplify-cfn-templates/function/alogpatientc3d75cb3-cloudformation-template.json",
+        "logicalId": "functionalogpatientc3d75cb3"
+      },
+      "lastPushTimeStamp": "2019-01-28T01:15:16.607Z",
+      "output": {
+        "Region": "us-east-2",
+        "Arn": "arn:aws:lambda:us-east-2:826339950142:function:alogpatientc3d75cb3",
+        "Name": "alogpatientc3d75cb3"
+      },
+      "lastPushDirHash": "45C+w1yTuuc0863JuhYygStNOYc="
+    }
+  }
 }
