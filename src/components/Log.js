@@ -86,33 +86,27 @@ export default class Log extends Component {
       }
     }
 
-  onValueChange(value: string) {
-      this.setState({
-        mood: value
-      });
-    }
-
-  medCheckY = () => {
-    if (!this.state.medsCheckY) {
-      this.setState({medsCheckY: true, meds:'Yes' });
-      console.log('cheked on');
-
-    } else {
-      this.setState({medsCheckY: false, meds: ''});
-      console.log('cheked off');
-    }
+  // onValueChange = (value: string) {
+  //     this.setState({mood: value});
+  // }
+  onValueChange = (value: string) => {
+    this.setState({mood: value});
   }
+
+ 
 
   medCheckN = () => {
     if (!this.state.medsCheckN) {
-      this.setState({medsCheckN: true, meds:'No' });
+      this.setState({medsCheckN: true,medsCheckY: false, meds:'No' });
       console.log('cheked on');
 
     } else {
-      this.setState({medsCheckN: false, meds: ''});
+      this.setState({medsCheckN: false,medsCheckY: true, meds:'Yes' });
       console.log('cheked off');
     }
   }
+
+  
 
   onChangeText = (key, val) => {
       this.setState({ [key]: val})
@@ -121,9 +115,9 @@ export default class Log extends Component {
   createLog = async () => {
 
       const logsAdded = this.state
-      if (logsAdded.description === '' || logsAdded.log === ''|| logsAdded.date === '' ||logsAdded.mood === ''||logsAdded.meds === ''||logsAdded.medsCheckN === true||logsAdded.medsCheckN === true) return
+      if (logsAdded.description === '' || logsAdded.log === ''|| logsAdded.date === '' ||logsAdded.mood === ''||logsAdded.meds === ''||logsAdded.medsCheckN === true||logsAdded.medsCheckY === false) return
       const logs = [...this.state.logs, logsAdded]
-      this.setState({ logs:[], description: '', log: '',  mood:'',  date: '',  medsCheckN: false , medsCheckY: false , meds: '' })
+      this.setState({ logs:[], description: '', log: '',  mood:'',  date: '',  medsCheckN: true  ,medsCheckY: false  , meds: '' })
       try {
         await API.graphql(graphqlOperation(createLog, logsAdded))
         console.log('logs successfully created.')
@@ -148,13 +142,16 @@ export default class Log extends Component {
               <Textarea  style={{margin: 3}} rowSpan={6} bordered placeholder="Log" onChangeText={val => this.onChangeText('log', val)}  value={this.state.log}/>
           </Form>
           <Form>
+            <Body style={{margin: 9}}>
+              <Text>Mood</Text>
+            </Body>
             <Picker
               mode="dropdown"
               iosHeader="Select Mood"
               iosIcon={<Icon name="arrow-down" />}
               style={{ width: 300 }}
               selectedValue={this.state.mood}
-              onValueChange={this.onValueChange.bind(this)}
+              onValueChange={this.onValueChange}
               label="What's your mood"
             >
               <Picker.Item label="Positive" value='green' />
@@ -171,11 +168,11 @@ export default class Log extends Component {
               <Body>
                 <Text>Yes</Text>
               </Body>
-              <CheckBox checked={this.state.medsCheckY} color="blue" onPress={this.medCheckY} />
+              <CheckBox checked={this.state.medsCheckN} color="blue" onPress={this.medCheckN} />
               <Body>
                 <Text>No</Text>
               </Body>
-              <CheckBox checked={this.state.medsCheckN} color="blue" onPress={this.medCheckN} />
+              <CheckBox checked={this.state.medsCheckY} color="blue" onPress={this.medCheckN} />
                 
             </ListItem>
           </Form>
