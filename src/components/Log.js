@@ -2,8 +2,7 @@ import React, { Component } from 'react';
 import { View} from 'react-native';
 import { 
   Container, 
-  Content,  
-  Button, 
+  Content,   
   Form, 
   Item, 
   Input, 
@@ -20,6 +19,7 @@ import {
   CardItem,
 
 } from 'native-base';
+import { Button } from './common';
 
 import API, { graphqlOperation } from '@aws-amplify/api';
 import * as queries from '../graphql/queries';
@@ -112,8 +112,8 @@ export default class Log extends Component {
       this.setState({ [key]: val})
     }
 
-  createLog = async () => {
-
+  createLogS = async () => {
+      console.log('pressed b');
       const logsAdded = this.state
       if (logsAdded.description === '' || logsAdded.log === ''|| logsAdded.date === '' ||logsAdded.mood === ''||logsAdded.meds === '') return
       const logs = [...this.state.logs, logsAdded]
@@ -177,7 +177,7 @@ export default class Log extends Component {
             </ListItem>
           </Form>
           <H3 style={{padding: 10}}>{this.state.date}</H3>
-          <Button primary  full onPress={this.createLog}>
+          <Button onPress={ this.createLogS}>
             <Text>Save Log</Text>
           </Button>
         </Content>
@@ -185,3 +185,4 @@ export default class Log extends Component {
     );
   }
 }
+

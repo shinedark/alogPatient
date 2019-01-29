@@ -88,7 +88,7 @@ export default class Events extends Component {
                 <Card key={index}>
                   <CardSection><Text>Description: {logsAdded.description}</Text></CardSection>
                   <CardSection><Text>Log: {logsAdded.log}</Text></CardSection>
-                  <CardSection><Text>Did Take Meds: {logsAdded.meds.toString()}</Text></CardSection>
+                  <CardSection><Text>Did Take Meds: {logsAdded.meds}</Text></CardSection>
                   <CardSection><Text>Date: {logsAdded.date}</Text></CardSection>
                   <Card style={{backgroundColor: logsAdded.mood, padding: 10}}></Card>
                 </Card>
