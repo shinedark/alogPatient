@@ -74,10 +74,28 @@ export default class Log extends Component {
     };
   }
 
+<<<<<<< HEAD
   componentDidMount() {
     this.setState({date : new Date().toLocaleString()});
     }
 
+=======
+  async componentDidMount() {
+    this.setState({date : new Date().toLocaleString()})
+
+      try {
+        const graphqldata = await API.graphql(graphqlOperation(queries.listLogs))
+        // console.log('graphqldata:', graphqldata)
+        this.setState({ logs: graphqldata.data.listLogs.items })
+      } catch (err) {
+        console.log('error: ', err)
+      }
+    }
+
+  // onValueChange = (value: string) {
+  //     this.setState({mood: value});
+  // }
+>>>>>>> 4a2341de5f12914bc357b75f8195ae9a67d1c164
   onValueChange = (value: string) => {
     this.setState({mood: value});
   }
@@ -104,7 +122,13 @@ export default class Log extends Component {
   createLogS = async () => {
       console.log('pressed b');
       const logsAdded = this.state
+<<<<<<< HEAD
       this.setState({ logs:[], description: '', log: '',  mood:'',  date: new Date().toLocaleString(),  medsCheckN: false  ,medsCheckY: false  , meds: '' })
+=======
+      if (logsAdded.description === '' || logsAdded.log === ''|| logsAdded.date === '' ||logsAdded.mood === ''||logsAdded.meds === '') return
+      const logs = [...this.state.logs, logsAdded]
+      this.setState({ logs, description: '', log: '',  mood:'',  date: '',  medsCheckN: false  ,medsCheckY: false  , meds: '' })
+>>>>>>> 4a2341de5f12914bc357b75f8195ae9a67d1c164
       try {
         await API.graphql(graphqlOperation(createLog, logsAdded))
         console.log('logs successfully created.')
