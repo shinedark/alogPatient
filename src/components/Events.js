@@ -4,31 +4,8 @@ import { Text , Content , Card, Container} from 'native-base';
 
 import API, { graphqlOperation  } from '@aws-amplify/api';
 import * as queries from '../graphql/queries';
-<<<<<<< HEAD
-// import * as Subscription from '../graphql/subscriptions';
-=======
-import * as subscriptions from '../graphql/subscriptions';
->>>>>>> 4a2341de5f12914bc357b75f8195ae9a67d1c164
-
-
-
-
-// const listLogs = `
-//   query Logs{
-//     listLogs{
-//       items{
-//         id
-//         log
-//         description
-//         mood
-//         date
-//         meds
-//       }
-//     }
-//   }`
 
  
-
 export default class Events extends Component {
   constructor(props){
     super(props);
@@ -41,26 +18,14 @@ export default class Events extends Component {
         logs:[],
       }
     }
-    // const log = logData.value.data.onCreateLog;
-    //       const logs = [
-    //         ...this.state.logs.filter(l => {
-    //           const val1 = l.log + l.description
-    //           const val2 = log.log + log.description
-    //           return val1 !== val2
-    //         }),
-    //         log
-    //       ]
-    //       this.setState({ logs })
-        
-
 
   async componentWillMount() {
     try{
        const allLogs = await API.graphql(graphqlOperation(queries.listLogs))
-<<<<<<< HEAD
+
        console.log(allLogs)
        this.setState({ logs: allLogs.data.listLogs.items})
-=======
+
        // console.log(allLogs)
        this.setState({ logs: allLogs.data.listLogs.items})
        const subscription = API.graphql(
@@ -80,7 +45,7 @@ export default class Events extends Component {
             this.setState({logs})
           }
        });
->>>>>>> 4a2341de5f12914bc357b75f8195ae9a67d1c164
+
      } catch(err){
        console.log(err)
        
