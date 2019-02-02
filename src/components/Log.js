@@ -74,21 +74,10 @@ export default class Log extends Component {
     };
   }
 
-  async componentDidMount() {
-    this.setState({date : new Date().toLocaleString()})
-
-      try {
-        const graphqldata = await API.graphql(graphqlOperation(queries.listLogs))
-        // console.log('graphqldata:', graphqldata)
-        this.setState({ logs: graphqldata.data.listLogs.items })
-      } catch (err) {
-        console.log('error: ', err)
-      }
+  componentDidMount() {
+    this.setState({date : new Date().toLocaleString()});
     }
 
-  // onValueChange = (value: string) {
-  //     this.setState({mood: value});
-  // }
   onValueChange = (value: string) => {
     this.setState({mood: value});
   }
@@ -115,9 +104,7 @@ export default class Log extends Component {
   createLogS = async () => {
       console.log('pressed b');
       const logsAdded = this.state
-      if (logsAdded.description === '' || logsAdded.log === ''|| logsAdded.date === '' ||logsAdded.mood === ''||logsAdded.meds === '') return
-      const logs = [...this.state.logs, logsAdded]
-      this.setState({ logs, description: '', log: '',  mood:'',  date: '',  medsCheckN: false  ,medsCheckY: false  , meds: '' })
+      this.setState({ logs:[], description: '', log: '',  mood:'',  date: new Date().toLocaleString(),  medsCheckN: false  ,medsCheckY: false  , meds: '' })
       try {
         await API.graphql(graphqlOperation(createLog, logsAdded))
         console.log('logs successfully created.')
