@@ -4,10 +4,10 @@
 export const getLog = `query GetLog($id: ID!) {
   getLog(id: $id) {
     id
-    description
     log
-    date
+    description
     mood
+    date
     meds
   }
 }
@@ -16,10 +16,10 @@ export const listLogs = `query ListLogs($filter: ModelLogFilterInput, $limit: In
   listLogs(filter: $filter, limit: $limit, nextToken: $nextToken) {
     items {
       id
-      description
       log
-      date
+      description
       mood
+      date
       meds
     }
     nextToken

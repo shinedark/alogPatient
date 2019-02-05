@@ -1,14 +1,14 @@
 {
     "providers": {
         "awscloudformation": {
-            "AuthRoleName": "alogatient-20190127120246-authRole",
-            "UnauthRoleArn": "arn:aws:iam::826339950142:role/alogatient-20190127120246-unauthRole",
-            "AuthRoleArn": "arn:aws:iam::826339950142:role/alogatient-20190127120246-authRole",
-            "Region": "us-east-2",
-            "DeploymentBucketName": "alogatient-20190127120246-deployment",
-            "UnauthRoleName": "alogatient-20190127120246-unauthRole",
-            "StackName": "alogatient-20190127120246",
-            "StackId": "arn:aws:cloudformation:us-east-2:826339950142:stack/alogatient-20190127120246/c092f470-225d-11e9-8f9c-025c218c397c"
+            "AuthRoleName": "alogatient-20190205090725-authRole",
+            "UnauthRoleArn": "arn:aws:iam::826339950142:role/alogatient-20190205090725-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::826339950142:role/alogatient-20190205090725-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "alogatient-20190205090725-deployment",
+            "UnauthRoleName": "alogatient-20190205090725-unauthRole",
+            "StackName": "alogatient-20190205090725",
+            "StackId": "arn:aws:cloudformation:us-east-1:826339950142:stack/alogatient-20190205090725/c05a2ea0-2957-11e9-aaa7-0e85eb8bafe8"
         }
     }
 }

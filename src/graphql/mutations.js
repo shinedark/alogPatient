@@ -4,10 +4,10 @@
 export const createLog = `mutation CreateLog($input: CreateLogInput!) {
   createLog(input: $input) {
     id
-    description
     log
-    date
+    description
     mood
+    date
     meds
   }
 }
@@ -15,10 +15,10 @@ export const createLog = `mutation CreateLog($input: CreateLogInput!) {
 export const updateLog = `mutation UpdateLog($input: UpdateLogInput!) {
   updateLog(input: $input) {
     id
-    description
     log
-    date
+    description
     mood
+    date
     meds
   }
 }
@@ -26,10 +26,10 @@ export const updateLog = `mutation UpdateLog($input: UpdateLogInput!) {
 export const deleteLog = `mutation DeleteLog($input: DeleteLogInput!) {
   deleteLog(input: $input) {
     id
-    description
     log
-    date
+    description
     mood
+    date
     meds
   }
 }

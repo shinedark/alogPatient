@@ -1,9 +1,9 @@
 type Log {
   id: ID!
-  description: String
   log: String
-  date: String
+  description: String
   mood: String
+  date: String
   meds: String
 }
 
@@ -74,10 +74,10 @@ input ModelBooleanFilterInput {
 
 input ModelLogFilterInput {
   id: ModelIDFilterInput
-  description: ModelStringFilterInput
   log: ModelStringFilterInput
-  date: ModelStringFilterInput
+  description: ModelStringFilterInput
   mood: ModelStringFilterInput
+  date: ModelStringFilterInput
   meds: ModelStringFilterInput
   and: [ModelLogFilterInput]
   or: [ModelLogFilterInput]
@@ -91,19 +91,19 @@ type Query {
 
 input CreateLogInput {
   id: ID
-  description: String
   log: String
-  date: String
+  description: String
   mood: String
+  date: String
   meds: String
 }
 
 input UpdateLogInput {
   id: ID!
-  description: String
   log: String
-  date: String
+  description: String
   mood: String
+  date: String
   meds: String
 }
 

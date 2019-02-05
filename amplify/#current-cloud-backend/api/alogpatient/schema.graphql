@@ -1,9 +1,8 @@
 type Log @model {
   id: ID!
-  description: String
   log: String
+  description: String
+  mood: String 
   date: String
-  mood: String
   meds: String
 }
-

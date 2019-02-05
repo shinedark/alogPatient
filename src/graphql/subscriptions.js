@@ -4,10 +4,10 @@
 export const onCreateLog = `subscription OnCreateLog {
   onCreateLog {
     id
-    description
     log
-    date
+    description
     mood
+    date
     meds
   }
 }
@@ -15,10 +15,10 @@ export const onCreateLog = `subscription OnCreateLog {
 export const onUpdateLog = `subscription OnUpdateLog {
   onUpdateLog {
     id
-    description
     log
-    date
+    description
     mood
+    date
     meds
   }
 }
@@ -26,10 +26,10 @@ export const onUpdateLog = `subscription OnUpdateLog {
 export const onDeleteLog = `subscription OnDeleteLog {
   onDeleteLog {
     id
-    description
     log
-    date
+    description
     mood
+    date
     meds
   }
 }

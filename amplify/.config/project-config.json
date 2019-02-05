@@ -10,7 +10,7 @@
         "config": {
             "SourceDir": "/",
             "DistributionDir": "/",
-            "BuildCommand": "",
+            "BuildCommand": "npm run-script build",
             "StartCommand": "expo start"
         }
     },

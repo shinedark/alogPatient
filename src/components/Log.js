@@ -23,7 +23,7 @@ import { Button } from './common';
 
 import API, { graphqlOperation } from '@aws-amplify/api';
 import * as queries from '../graphql/queries';
-import * as mutations from '../graphql/mutations';
+// import * as mutations from '../graphql/mutations';
 
 const createLog = `
   mutation($description: String, $log: String, $mood: String, $date: String , $meds: String ) {
@@ -54,16 +54,10 @@ export default class Log extends Component {
         medsCheckN: false,
         meds: '',
         description: '',
-        log: '',
+        // log: '',
         logs:[]
     };
   }
-
-
-  componentDidMount() {
-    this.setState({date : new Date().toLocaleString()});
-    }
-
 
   async componentDidMount() {
     this.setState({date : new Date().toLocaleString()})
@@ -73,13 +67,10 @@ export default class Log extends Component {
         // console.log('graphqldata:', graphqldata)
         this.setState({ logs: graphqldata.data.listLogs.items })
       } catch (err) {
-        console.log('error: ', err)
+        // console.log('error: ', err)
       }
     }
 
-  // onValueChange = (value: string) {
-  //     this.setState({mood: value});
-  // }
 
   onValueChange = (value: string) => {
     this.setState({mood: value});
