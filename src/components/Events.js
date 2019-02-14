@@ -23,25 +23,26 @@ export default class Events extends Component {
   async componentWillMount() {
     try{
        const allLogs = await API.graphql(graphqlOperation(queries.listLogs))
+       console.log(allLogs);
        this.setState({ logs: allLogs.data.listLogs.items})
 
-       const subscription = API.graphql(
-           graphqlOperation(subscriptions.onCreateLog)
-       ).subscribe({
-           next: (logData) => {
-            console.log(logData);
-            // const log = logData.value.data.onCreateLog
-            // const logs = [
-            //   ...this.state.logs.filter(l =>{
-            //     const val1 = l.meds + l.description
-            //     const val2 = log.meds + log.description
-            //     return val1 !== val2
-            //   }),
-            //   log
-            // ]
-            // this.setState({logs})
-          }
-       });
+       // const subscription = API.graphql(
+       //     graphqlOperation(subscriptions.onCreateLog)
+       // ).subscribe({
+       //     next: (logData) => {
+       //      console.log(logData);
+       //      // const log = logData.value.data.onCreateLog
+       //      // const logs = [
+       //      //   ...this.state.logs.filter(l =>{
+       //      //     const val1 = l.meds + l.description
+       //      //     const val2 = log.meds + log.description
+       //      //     return val1 !== val2
+       //      //   }),
+       //      //   log
+       //      // ]
+       //      // this.setState({logs})
+       //    }
+       // });
 
      } catch(err){
        console.log(err)

@@ -134,10 +134,10 @@
 				"TemplateURL": "https://s3.amazonaws.com/alogatient-20190205090725-deployment/amplify-cfn-templates/api/cloudformation-template.json",
 				"Parameters": {
 					"AppSyncApiName": "alogpatient",
-					"schemaGraphql": "s3://alogatient-20190205090725-deployment/amplify-appsync-files/schema.graphql.1549380779122",
+					"schemaGraphql": "s3://alogatient-20190205090725-deployment/amplify-appsync-files/schema.graphql.1550104455306",
 					"ResolverBucket": "alogatient-20190205090725-deployment",
 					"ResolverRootKey": "amplify-appsync-files",
-					"DeploymentTimestamp": "1549380779122"
+					"DeploymentTimestamp": "1550104455306"
 				}
 			}
 		}

@@ -1,53 +1,53 @@
 {
-	"providers": {
-		"awscloudformation": {
-			"AuthRoleName": "alogatient-20190205090725-authRole",
-			"UnauthRoleArn": "arn:aws:iam::826339950142:role/alogatient-20190205090725-unauthRole",
-			"AuthRoleArn": "arn:aws:iam::826339950142:role/alogatient-20190205090725-authRole",
-			"Region": "us-east-1",
-			"DeploymentBucketName": "alogatient-20190205090725-deployment",
-			"UnauthRoleName": "alogatient-20190205090725-unauthRole",
-			"StackName": "alogatient-20190205090725",
-			"StackId": "arn:aws:cloudformation:us-east-1:826339950142:stack/alogatient-20190205090725/c05a2ea0-2957-11e9-aaa7-0e85eb8bafe8"
-		}
-	},
-	"auth": {
-		"cognitoa8948e58": {
-			"service": "Cognito",
-			"providerPlugin": "awscloudformation",
-			"providerMetadata": {
-				"s3TemplateURL": "https://s3.amazonaws.com/alogatient-20190205090725-deployment/amplify-cfn-templates/auth/cognitoa8948e58-cloudformation-template.yml",
-				"logicalId": "authcognitoa8948e58"
-			},
-			"lastPushTimeStamp": "2019-02-05T15:35:42.859Z",
-			"output": {
-				"AppClientSecret": "1fq983cjpofq1pp640fj9ptag42hsh8pouf8fi9talp2s0rjluem",
-				"UserPoolId": "us-east-1_qjvtPrQ4n",
-				"AppClientIDWeb": "2tq1l391qtbish6iqpsjitrvff",
-				"AppClientID": "2uitr4rpu8s8i50787luf1hur8",
-				"IdentityPoolId": "us-east-1:93568806-641d-45aa-a27b-9ecd627d4dbd",
-				"IdentityPoolName": "cognitoa8948e58_identitypool_a8948e58",
-				"UserPoolName": "cognitoa8948e58_userpool_a8948e58"
-			},
-			"lastPushDirHash": "N6GazbwocWzC0nuxGmXoTcVJ0LI="
-		}
-	},
-	"api": {
-		"alogpatient": {
-			"service": "AppSync",
-			"providerPlugin": "awscloudformation",
-			"output": {
-				"securityType": "API_KEY",
-				"GraphQLAPIIdOutput": "g6m7ykdh5bdcvllnjgdwjdxpea",
-				"GraphQLAPIEndpointOutput": "https://tlvbowtmt5ddjfk4cx7twhiwu4.appsync-api.us-east-1.amazonaws.com/graphql",
-				"GraphQLAPIKeyOutput": "da2-3ewkmbjt25dzhiqlqdbrlmgoam"
-			},
-			"providerMetadata": {
-				"s3TemplateURL": "https://s3.amazonaws.com/alogatient-20190205090725-deployment/amplify-cfn-templates/api/cloudformation-template.json",
-				"logicalId": "apialogpatient"
-			},
-			"lastPushTimeStamp": "2019-02-05T15:35:44.169Z",
-			"lastPushDirHash": "c39qTr9FEF07Yyjivh0ZBpY8ypQ="
-		}
-	}
+    "providers": {
+        "awscloudformation": {
+            "AuthRoleName": "alogatient-20190205090725-authRole",
+            "UnauthRoleArn": "arn:aws:iam::826339950142:role/alogatient-20190205090725-unauthRole",
+            "AuthRoleArn": "arn:aws:iam::826339950142:role/alogatient-20190205090725-authRole",
+            "Region": "us-east-1",
+            "DeploymentBucketName": "alogatient-20190205090725-deployment",
+            "UnauthRoleName": "alogatient-20190205090725-unauthRole",
+            "StackName": "alogatient-20190205090725",
+            "StackId": "arn:aws:cloudformation:us-east-1:826339950142:stack/alogatient-20190205090725/c05a2ea0-2957-11e9-aaa7-0e85eb8bafe8"
+        }
+    },
+    "auth": {
+        "cognitoa8948e58": {
+            "service": "Cognito",
+            "providerPlugin": "awscloudformation",
+            "providerMetadata": {
+                "s3TemplateURL": "https://s3.amazonaws.com/alogatient-20190205090725-deployment/amplify-cfn-templates/auth/cognitoa8948e58-cloudformation-template.yml",
+                "logicalId": "authcognitoa8948e58"
+            },
+            "lastPushTimeStamp": "2019-02-05T15:35:42.859Z",
+            "output": {
+                "AppClientSecret": "1fq983cjpofq1pp640fj9ptag42hsh8pouf8fi9talp2s0rjluem",
+                "UserPoolId": "us-east-1_qjvtPrQ4n",
+                "AppClientIDWeb": "2tq1l391qtbish6iqpsjitrvff",
+                "AppClientID": "2uitr4rpu8s8i50787luf1hur8",
+                "IdentityPoolId": "us-east-1:93568806-641d-45aa-a27b-9ecd627d4dbd",
+                "IdentityPoolName": "cognitoa8948e58_identitypool_a8948e58",
+                "UserPoolName": "cognitoa8948e58_userpool_a8948e58"
+            },
+            "lastPushDirHash": "N6GazbwocWzC0nuxGmXoTcVJ0LI="
+        }
+    },
+    "api": {
+        "alogpatient": {
+            "service": "AppSync",
+            "providerPlugin": "awscloudformation",
+            "output": {
+                "securityType": "API_KEY",
+                "GraphQLAPIIdOutput": "g6m7ykdh5bdcvllnjgdwjdxpea",
+                "GraphQLAPIEndpointOutput": "https://tlvbowtmt5ddjfk4cx7twhiwu4.appsync-api.us-east-1.amazonaws.com/graphql",
+                "GraphQLAPIKeyOutput": "da2-3ewkmbjt25dzhiqlqdbrlmgoam"
+            },
+            "providerMetadata": {
+                "s3TemplateURL": "https://s3.amazonaws.com/alogatient-20190205090725-deployment/amplify-cfn-templates/api/cloudformation-template.json",
+                "logicalId": "apialogpatient"
+            },
+            "lastPushTimeStamp": "2019-02-14T00:34:39.174Z",
+            "lastPushDirHash": "c39qTr9FEF07Yyjivh0ZBpY8ypQ="
+        }
+    }
 }
