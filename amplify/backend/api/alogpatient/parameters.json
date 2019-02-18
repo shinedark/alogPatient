@@ -1,7 +1,7 @@
 {
     "AppSyncApiName": "alogpatient",
-    "schemaGraphql": "s3://alogatient-20190205090725-deployment/amplify-appsync-files/schema.graphql.1550104455306",
-    "ResolverBucket": "alogatient-20190205090725-deployment",
+    "schemaGraphql": "s3://alogatient-20190218111938-deployment/amplify-appsync-files/schema.graphql.1550511426408",
+    "ResolverBucket": "alogatient-20190218111938-deployment",
     "ResolverRootKey": "amplify-appsync-files",
-    "DeploymentTimestamp": "1550104455306"
+    "DeploymentTimestamp": "1550511426408"
 }

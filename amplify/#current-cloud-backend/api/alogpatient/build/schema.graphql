@@ -1,5 +1,5 @@
 type Log {
-  id: ID!
+  id: ID
   log: String
   description: String
   mood: String
