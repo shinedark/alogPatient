@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View} from 'react-native';
+import { View , KeyboardAvoidingView} from 'react-native';
 import { 
   Container, 
   Content,   
@@ -114,6 +114,7 @@ export default class Log extends Component {
 
   render() {
     return (
+      <KeyboardAvoidingView style={{flex: 1, ustifyContent: 'center'}} behavior="padding" enabled>
       <Container>
         
         <Content>
@@ -167,6 +168,7 @@ export default class Log extends Component {
           </Button>
         </Content>
       </Container>
+      </KeyboardAvoidingView>
     );
   }
 }

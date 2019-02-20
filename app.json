@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "alogPatient",
-    "description": "trying aws amplify out",
+    "description": "trying aws amplify out , log system for patient doctor treatment",
     "slug": "alogPatient",
     "privacy": "public",
     "sdkVersion": "32.0.0",
